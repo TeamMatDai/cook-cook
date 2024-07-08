@@ -1,5 +1,5 @@
-import React from 'react';
-
-export default function EditPage() {
+const EditPage = () => {
   return <div>EditPage</div>;
-}
+};
+
+export default EditPage;

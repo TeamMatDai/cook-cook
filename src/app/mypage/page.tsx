@@ -1,5 +1,5 @@
-import React from 'react'
+const MyPage = () => {
+  return <div>MyPage</div>;
+};
 
-export default function MypagePage() {
-  return <div>MypagePage</div>;
-}
+export default MyPage;

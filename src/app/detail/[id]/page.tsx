@@ -1,5 +1,5 @@
-import React from 'react';
-
-export default function DetailPage() {
+const DetailPage = () => {
   return <div>DetailPage</div>;
-}
+};
+
+export default DetailPage;
