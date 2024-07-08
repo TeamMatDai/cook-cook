@@ -22,7 +22,8 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} font-pretendard`}>
+      <body className={`${pretendard.variable} font-pretendard max-w-[500px]`}>
+        <div className="mx-auto bg-gray-500 fixed h-full max-w-[500px]" />
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
