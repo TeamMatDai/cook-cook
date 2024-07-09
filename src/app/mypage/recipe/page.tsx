@@ -2,7 +2,11 @@
 import dayjs, { type Dayjs } from 'dayjs';
 import { useState } from 'react';
 import NavigateArrow from '@/icons/navigate-arrow.svg';
+import { cva } from 'class-variance-authority';
 
+const SUNDAY = 'sunday';
+const SATURDAY = 'saturday';
+const DEFAULT = 'default';
 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 
 const getWeekDates = (baseDate: Dayjs, offsetWeeks: number = 0) => {
@@ -11,6 +15,54 @@ const getWeekDates = (baseDate: Dayjs, offsetWeeks: number = 0) => {
 
   return Array.from({ length: 7 }, (_, index) => startOfWeek.add(index, 'day'));
 };
+
+const dayClass = cva('w-7 text-[16px] font-medium', {
+  variants: {
+    dayType: {
+      sunday: 'text-[#F72A25]',
+      saturday: 'text-[#2686FB]',
+      default: 'text-[#666]'
+    }
+  },
+  defaultVariants: {
+    dayType: 'default'
+  }
+});
+
+const dateClass = cva('relative w-7 h-7 -z-0', {
+  variants: {
+    dayType: {
+      sunday: 'text-[#F72A25]',
+      saturday: 'text-[#2686FB]',
+      default: ''
+    },
+    isSelected: {
+      true: 'text-white font-semibold',
+      false: ''
+    },
+    isToday: {
+      true: 'text-white font-semibold',
+      false: ''
+    }
+  }
+});
+
+const backgroundClass = cva('absolute top-0 left-0 w-7 h-7 rounded-full -z-[1]', {
+  variants: {
+    isSelected: {
+      true: 'bg-[#222]',
+      false: ''
+    },
+    isToday: {
+      true: 'bg-[#ccc]',
+      false: ''
+    }
+  },
+  defaultVariants: {
+    isSelected: false,
+    isToday: false
+  }
+});
 
 const MyRecipePage = () => {
   const today = dayjs();
@@ -66,13 +118,9 @@ const MyRecipePage = () => {
         {daysOfWeek.map((day, index) => (
           <div
             key={day}
-            className={`w-7 text-[16px] font-medium ${
-              index === 0
-                ? 'text-[#F72A25]'
-                : index === array.length - 1
-                ? 'text-[#2686FB]'
-                : 'text-[#666]'
-            }`}
+            className={dayClass({
+              dayType: index === 0 ? SUNDAY : index === 6 ? SATURDAY : DEFAULT
+            })}
           >
             {day}
           </div>
@@ -84,22 +132,18 @@ const MyRecipePage = () => {
           <div key={date.date()}>
             <button
               onClick={() => handleDateClick(date)}
-              className={`relative ${
-                date.isSame(selectedDate, 'day') || date.isSame(dayjs(), 'day')
-                  ? 'text-white font-semibold'
-                  : index === 0
-                  ? 'text-[#F72A25]'
-                  : index === array.length - 1
-                  ? 'text-[#2686FB]'
-                  : ''
-              } w-7 h-7 -z-0`}
+              className={dateClass({
+                isSelected: date.isSame(selectedDate, 'day'),
+                isToday: date.isSame(dayjs(), 'day'),
+                dayType: index === 0 ? SUNDAY : index === 6 ? SATURDAY : DEFAULT
+              })}
             >
-              {!date.isSame(selectedDate, 'day') && date.isSame(dayjs(), 'day') && (
-                <span className="absolute top-0 left-0 w-7 h-7 rounded-full bg-[#ccc] -z-[1]" />
-              )}
-              {date.isSame(selectedDate, 'day') && (
-                <span className="absolute top-0 left-0 w-7 h-7 rounded-full bg-[#222] -z-[1]" />
-              )}
+              <span
+                className={backgroundClass({
+                  isSelected: date.isSame(selectedDate, 'day'),
+                  isToday: date.isSame(dayjs(), 'day')
+                })}
+              />
               {date.date()}
             </button>
             <div className="w-5 h-5 mt-[2px] mx-auto flex justify-center items-center">
