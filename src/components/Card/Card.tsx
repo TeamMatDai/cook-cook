@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { Children, type PropsWithChildren } from 'react';
-import Typography from '../Typography';
+import type { PropsWithChildren } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
+import Typography from '../Typography';
 
 export const CardList = ({
   as: Component = 'ul',
