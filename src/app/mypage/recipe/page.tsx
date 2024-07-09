@@ -3,6 +3,7 @@ import dayjs, { type Dayjs } from 'dayjs';
 import { useState } from 'react';
 import NavigateArrow from '@/icons/navigate-arrow.svg';
 import { cva } from 'class-variance-authority';
+import Typography from '@/components/Typography';
 
 const SUNDAY = 'sunday';
 const SATURDAY = 'saturday';
@@ -97,64 +98,71 @@ const MyRecipePage = () => {
   };
 
   return (
-    <div className="p-[26px_26px_20px] rounded-[16px] shadow-[0_20px_30px_0_rgba(220,224,249,0.5)] border border-solid border-[#dbddeb] bg-white">
-      <div className="flex justify-between mb-7">
-        <div className="flex">
-          <div className="font-extrabold text-2xl w-[122px]">{selectedDate.format('YYYY.MM.')}</div>
-          <div className="flex gap-2">
-            <button onClick={handlePreviousWeek}>
-              <NavigateArrow />
-            </button>
-            <button onClick={handleNextWeek}>
-              <NavigateArrow className="rotate-180" />
-            </button>
+    <>
+      <Typography as="strong" size="xl" weight="medium" className="block mb-4">
+        내가 작성한 레시피
+      </Typography>
+      <div className="p-[26px_26px_20px] rounded-[16px] shadow-[0_20px_30px_0_rgba(220,224,249,0.5)] border border-solid border-[#dbddeb] bg-white">
+        <div className="flex justify-between mb-7">
+          <div className="flex">
+            <div className="font-extrabold text-2xl w-[122px]">
+              {selectedDate.format('YYYY.MM.')}
+            </div>
+            <div className="flex gap-2">
+              <button onClick={handlePreviousWeek}>
+                <NavigateArrow />
+              </button>
+              <button onClick={handleNextWeek}>
+                <NavigateArrow className="rotate-180" />
+              </button>
+            </div>
           </div>
+          <button onClick={handleToday} className="text-[15px] font-medium text-[#999]">
+            오늘
+          </button>
         </div>
-        <button onClick={handleToday} className="text-[15px] font-medium text-[#999]">
-          오늘
-        </button>
-      </div>
-      <div className="flex gap-6 text-center justify-between mb-5">
-        {daysOfWeek.map((day, index) => (
-          <div
-            key={day}
-            className={dayClass({
-              dayType: index === 0 ? SUNDAY : index === 6 ? SATURDAY : DEFAULT
-            })}
-          >
-            {day}
-          </div>
-        ))}
-      </div>
-
-      <div className="flex gap-6 text-center justify-between">
-        {array.map((date, index) => (
-          <div key={date.date()}>
-            <button
-              onClick={() => handleDateClick(date)}
-              className={dateClass({
-                isSelected: date.isSame(selectedDate, 'day'),
-                isToday: date.isSame(dayjs(), 'day'),
+        <div className="flex gap-6 text-center justify-between mb-5">
+          {daysOfWeek.map((day, index) => (
+            <div
+              key={day}
+              className={dayClass({
                 dayType: index === 0 ? SUNDAY : index === 6 ? SATURDAY : DEFAULT
               })}
             >
-              <span
-                className={backgroundClass({
-                  isSelected: date.isSame(selectedDate, 'day'),
-                  isToday: date.isSame(dayjs(), 'day')
-                })}
-              />
-              {date.date()}
-            </button>
-            <div className="w-5 h-5 mt-[2px] mx-auto flex justify-center items-center">
-              {date.isSame(selectedDate, 'day') && (
-                <span className="w-1 h-1 rounded-full bg-red-500" />
-              )}
+              {day}
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        <div className="flex gap-6 text-center justify-between">
+          {array.map((date, index) => (
+            <div key={date.date()}>
+              <button
+                onClick={() => handleDateClick(date)}
+                className={dateClass({
+                  isSelected: date.isSame(selectedDate, 'day'),
+                  isToday: date.isSame(dayjs(), 'day'),
+                  dayType: index === 0 ? SUNDAY : index === 6 ? SATURDAY : DEFAULT
+                })}
+              >
+                <span
+                  className={backgroundClass({
+                    isSelected: date.isSame(selectedDate, 'day'),
+                    isToday: date.isSame(dayjs(), 'day')
+                  })}
+                />
+                {date.date()}
+              </button>
+              <div className="w-5 h-5 mt-[2px] mx-auto flex justify-center items-center">
+                {date.isSame(selectedDate, 'day') && (
+                  <span className="w-1 h-1 rounded-full bg-red-500" />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
