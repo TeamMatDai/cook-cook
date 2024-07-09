@@ -60,7 +60,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
             if (range) {
               // 삽입한 이미지 다음으로 커서 옮기기
               editor.insertEmbed(range.index, 'image', postImageUrl);
-              editor.setSelection(range.index + 1);
+              editor.setSelection(range.index + 1, 0);
               editor.insertText(range.index + 1, '\n');
             } else {
               console.error('No selection range found.');
