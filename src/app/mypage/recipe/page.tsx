@@ -4,6 +4,7 @@ import { useState } from 'react';
 import NavigateArrow from '@/icons/navigate-arrow.svg';
 import { cva } from 'class-variance-authority';
 import Typography from '@/components/Typography';
+import { CardImage, CardList, CardItem, CardTitle, CardDescription } from '@/components/Card';
 
 const SUNDAY = 'sunday';
 const SATURDAY = 'saturday';
@@ -55,10 +56,27 @@ const backgroundClass = cva('absolute top-0 left-0 w-7 h-7 rounded-full -z-[1]',
       false: ''
     },
     isToday: {
-      true: 'bg-[#ccc]',
+      true: '',
       false: ''
     }
   },
+  compoundVariants: [
+    {
+      isSelected: true,
+      isToday: true,
+      className: 'bg-[#222]'
+    },
+    {
+      isSelected: false,
+      isToday: true,
+      className: 'bg-[#ccc]'
+    },
+    {
+      isSelected: true,
+      isToday: false,
+      className: 'bg-[#222]'
+    }
+  ],
   defaultVariants: {
     isSelected: false,
     isToday: false
@@ -99,7 +117,12 @@ const MyRecipePage = () => {
 
   return (
     <>
-      <Typography as="strong" size="xl" weight="medium" className="block mb-4">
+      <Typography
+        as="strong"
+        size="xl"
+        weight="medium"
+        className="text-black block mt-[42px] mb-[26px]"
+      >
         내가 작성한 레시피
       </Typography>
       <div className="p-[26px_26px_20px] rounded-[16px] shadow-[0_20px_30px_0_rgba(220,224,249,0.5)] border border-solid border-[#dbddeb] bg-white">
@@ -162,6 +185,15 @@ const MyRecipePage = () => {
           ))}
         </div>
       </div>
+      <CardList className="mt-[60px]">
+        {Array.from({ length: 4 }, (_, index) => (
+          <CardItem href="/" key={index}>
+            <CardImage src="https://static.wtable.co.kr/image/production/service/product/35966/608f87f9-3193-4497-95dd-f163a4871b81.jpg?size=500x500" />
+            <CardTitle>전복 황태 삼계탕</CardTitle>
+            <CardDescription>간장을 태워 불맛을 낸 전복과 황태를 넣은 삼계탕</CardDescription>
+          </CardItem>
+        ))}
+      </CardList>
     </>
   );
 };

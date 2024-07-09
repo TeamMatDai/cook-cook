@@ -14,24 +14,19 @@ const typographyClass = cva('', {
       regular: 'font-regular',
       bold: 'font-bold',
       semibold: 'font-semibold',
-      medium: 'font-medium'
+      medium: 'font-medium',
+      light: 'font-light'
     },
     size: {
-      sm: 'text-sm',
-      md: 'text-md',
+      sm: 'text-[13px]',
+      md: 'text-base',
       lg: 'text-lg',
       xl: 'text-xl'
-    },
-    color: {
-      black: 'text-black',
-      white: 'text-white',
-      gray: 'text-gray-500'
     }
   },
   defaultVariants: {
     weight: 'regular',
-    size: 'md',
-    color: 'black'
+    size: 'md'
   }
 });
 
@@ -39,13 +34,12 @@ const Typography = ({
   as: Component = 'div',
   weight = 'regular',
   size = 'md',
-  color = 'black',
   className,
   children,
   ...props
 }: TypographyProps) => {
   return (
-    <Component className={clsx(typographyClass({ weight, size, color }), className)} {...props}>
+    <Component className={clsx(typographyClass({ weight, size }), className)} {...props}>
       {children}
     </Component>
   );
