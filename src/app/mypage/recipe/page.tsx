@@ -176,6 +176,7 @@ const MyRecipePage = () => {
                 />
                 {date.date()}
               </button>
+              {/* !TODO: 게시글이 있는 날만 색칠하기 */}
               <div className="w-5 h-5 mt-[2px] mx-auto flex justify-center items-center">
                 {date.isSame(selectedDate, 'day') && (
                   <span className="w-1 h-1 rounded-full bg-red-500" />
