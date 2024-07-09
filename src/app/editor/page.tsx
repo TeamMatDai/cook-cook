@@ -4,13 +4,11 @@ import React, { useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '@/utils/supabase/supabaseClient';
 import QuillEditor from './components/QuillEditor';
-import TitleInput from './components/TitleInput';
-import SubTitleInput from './components/SubTitleInput';
-import DescriptionInput from './components/DescriptionInput';
 import FileInput from './components/FileInput';
 import TimeInput from './components/TimeInput';
 import LevelSelector from './components/LevelSelector';
 import MaterialList from './components/MaterialList';
+import CommonInput from './components/CommonInput';
 
 const EditPage = () => {
   const [title, setTitle] = useState<string>('');
@@ -69,9 +67,9 @@ const EditPage = () => {
 
   return (
     <div>
-      <TitleInput title={title} setTitle={setTitle} />
-      <SubTitleInput subtitle={subtitle} setSubtitle={setSubtitle} />
-      <DescriptionInput description={description} setDescription={setDescription} />
+      <CommonInput placeholder="제목을 입력하세요" value={title} setValue={setTitle} />
+      <CommonInput placeholder="한줄설명을 입력하세요" value={subtitle} setValue={setSubtitle} />
+      <CommonInput placeholder="내용을 입력하세요" value={description} setValue={setDescription} />
       <FileInput fileName={fileName} onChange={handleFileChange} ref={fileInputRef} />
       <TimeInput time={time} setTime={setTime} />
       <LevelSelector level={level} setLevel={setLevel} />
