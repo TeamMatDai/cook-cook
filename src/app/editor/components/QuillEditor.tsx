@@ -25,7 +25,7 @@ const ReactQuillWrapper = dynamic(
 );
 
 const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
-  const quillRef = useRef<ReactQuill>(null);
+  const quillRef = useRef<ReactQuill | null>(null);
 
   const handleImage = () => {
     console.log('에디터에서 이미지버튼 클릭');
@@ -57,10 +57,14 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
             const editor = quillRef.current!.getEditor();
             const range = editor.getSelection();
 
-            // 삽입한 이미지 다음으로 커서 옮기기
-            editor.insertEmbed(range.index, 'image', postImageUrl);
-            editor.setSelection(range.index + 1);
-            editor.insertText(range.index + 1, '\n');
+            if (range) {
+              // 삽입한 이미지 다음으로 커서 옮기기
+              editor.insertEmbed(range.index, 'image', postImageUrl);
+              editor.setSelection(range.index + 1);
+              editor.insertText(range.index + 1, '\n');
+            } else {
+              console.error('No selection range found.');
+            }
           } else {
             console.error('No public URL found in response data.');
           }

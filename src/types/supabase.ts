@@ -24,36 +24,26 @@ export type Database = {
       recipes: {
         Row: {
           id?: string;
-          created_at: string;
           recipe: string;
           title: string;
           subtitle: string;
           description: string;
-          time: number;
-          material: string;
           thumbnail: string;
+          time: number;
+          level: string;
+          material: { name: string; value: string }[];
+          created_at: string;
         };
         Insert: {
           id?: string;
-          created_at: string;
           recipe: string;
           title: string;
           subtitle: string;
           description: string;
-          time: number;
-          material: string;
           thumbnail: string;
-        };
-        Update: {
-          id?: string;
-          created_at: string;
-          recipe: string;
-          title: string;
-          subtitle: string;
-          description: string;
           time: number;
-          material: string;
-          thumbnail: string;
+          material: { name: string; value: string }[];
+          // created_at: string;
         };
         Relationships: [];
       };
