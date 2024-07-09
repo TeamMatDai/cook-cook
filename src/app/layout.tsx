@@ -23,8 +23,7 @@ const RootLayout = ({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} font-pretendard max-w-[500px] mx-auto`}
-        style={{ backgroundColor: '#f9f9f9' }}
+        className={`${pretendard.variable} font-pretendard max-w-[500px] mx-auto bg-baseBackground`}
       >
         <div className="mx-auto fixed h-full max-w-[500px] bg-white top-0 left-1/2 w-full z-[-1] transform -translate-x-1/2 pointer-events-none" />
         <QueryProvider>{children}</QueryProvider>

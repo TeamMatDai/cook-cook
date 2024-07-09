@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        baseBackground: '#f9f9f9'
+      },
       fontFamily: {
         pretendard: ['var(--font-pretendard)']
       }
@@ -17,4 +20,5 @@ const config: Config = {
   },
   plugins: []
 };
+
 export default config;
