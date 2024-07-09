@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
@@ -24,54 +24,54 @@ const ReactQuillWrapper = dynamic(
   { ssr: false, loading: () => <p>Loading ...</p> }
 );
 
-const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
-  const quillRef = useRef<ReactQuill | null>(null);
+const handleImage = async (quillRef: React.RefObject<ReactQuill>) => {
+  console.log('에디터에서 이미지버튼 클릭');
 
-  const handleImage = () => {
-    console.log('에디터에서 이미지버튼 클릭');
+  const input = document.createElement('input');
+  input.setAttribute('type', 'file');
+  input.setAttribute('accept', 'image/*');
+  input.click();
 
-    const input = document.createElement('input');
-    input.setAttribute('type', 'file');
-    input.setAttribute('accept', 'image/*');
-    input.click();
+  input.addEventListener('change', async () => {
+    if (input.files) {
+      const file = input.files[0];
+      const fileNewName = uuidv4();
 
-    input.addEventListener('change', async () => {
-      if (input.files) {
-        const file = input.files[0];
-        const fileNewName = uuidv4();
+      const { data, error } = await supabase.storage
+        .from('quillImgs')
+        .upload(`quill_imgs/${fileNewName}`, file);
+      if (error) {
+        console.error('이미지 업로드 중 오류 발생:', error);
+      } else {
+        console.log('이미지가 성공적으로 업로드되었습니다:', data);
 
-        const { data, error } = await supabase.storage
+        const response = supabase.storage
           .from('quillImgs')
-          .upload(`quill_imgs/${fileNewName}`, file);
-        if (error) {
-          console.error('이미지 업로드 중 오류 발생:', error);
-        } else {
-          console.log('이미지가 성공적으로 업로드되었습니다:', data);
+          .getPublicUrl(`quill_imgs/${fileNewName}`);
 
-          const response = supabase.storage
-            .from('quillImgs')
-            .getPublicUrl(`quill_imgs/${fileNewName}`);
+        if (response.data) {
+          const postImageUrl = response.data.publicUrl;
+          const editor = quillRef.current!.getEditor();
+          const range = editor.getSelection();
 
-          if (response.data) {
-            const postImageUrl = response.data.publicUrl;
-            const editor = quillRef.current!.getEditor();
-            const range = editor.getSelection();
-
-            if (range) {
-              // 삽입한 이미지 다음으로 커서 옮기기
-              editor.insertEmbed(range.index, 'image', postImageUrl);
-              editor.setSelection(range.index + 1, 0);
-              editor.insertText(range.index + 1, '\n');
-            } else {
-              console.error('No selection range found.');
-            }
+          if (range) {
+            // 삽입한 이미지 다음으로 커서 옮기기
+            editor.insertEmbed(range.index, 'image', postImageUrl);
+            editor.setSelection(range.index + 1, 0);
+            editor.insertText(range.index + 1, '\n');
           } else {
-            console.error('No public URL found in response data.');
+            console.error('No selection range found.');
           }
+        } else {
+          console.error('No public URL found in response data.');
         }
       }
-    });
-  };
+    }
+  });
+};
+
+const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
+  const quillRef = useRef<ReactQuill | null>(null);
 
   const modules = React.useMemo(
     () => ({
@@ -85,7 +85,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
           ['clean']
         ],
         handlers: {
-          image: handleImage
+          image: () => handleImage(quillRef)
         }
       }
     }),
@@ -110,15 +110,18 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
   ];
 
   return (
-    <ReactQuillWrapper
-      forwardedRef={quillRef}
-      theme="snow"
-      modules={modules}
-      formats={formats}
-      placeholder="내용을 입력하세요."
-      value={value}
-      onChange={setValue}
-    />
+    <>
+      <p>레시피</p>
+      <ReactQuillWrapper
+        forwardedRef={quillRef}
+        theme="snow"
+        modules={modules}
+        formats={formats}
+        placeholder="나만의 레시피를 작성해주세요!"
+        value={value}
+        onChange={setValue}
+      />
+    </>
   );
 };
 
