@@ -19,7 +19,7 @@ const MyRecipePage = () => {
   const array = getWeekDates(today, offsetWeeks);
 
   const updateDate = (newOffsetWeeks: number, newDate: Dayjs) => {
-    setOffsetWeeks((prev) => prev + newOffsetWeeks);
+    setOffsetWeeks((prev) => (newOffsetWeeks === 0 ? 0 : prev + newOffsetWeeks));
     setSelectedDate(newDate);
   };
 
