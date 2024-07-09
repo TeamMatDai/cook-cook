@@ -1,1 +1,12 @@
-.next
+.next/
+.turbo/
+_next/
+__tmp__/
+dist/
+node_modules/
+target/
+compiled/
+
+**/.git
+**/.svn
+**/.hg
