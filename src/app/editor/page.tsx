@@ -32,13 +32,27 @@ const EditPage = () => {
   };
 
   const handleSubmit = async () => {
+    let thumbnailUrl = '';
+
+    if (thumbnail) {
+      const { data, error } = await supabase.storage
+        .from('thumbnails')
+        .upload(`thumbnails/${uuidv4()}`, thumbnail);
+      if (error) {
+        console.error('썸네일 업로드 중 오류 발생:', error);
+        return;
+      }
+      const { data: thumbnailData } = supabase.storage.from('thumbnails').getPublicUrl(data.path);
+      thumbnailUrl = thumbnailData.publicUrl;
+    }
+
     const { data, error } = await supabase.from('recipes').insert([
       {
         id: uuidv4(),
         title,
         subtitle,
         description,
-        thumbnail: thumbnail ? URL.createObjectURL(thumbnail) : '',
+        thumbnail: thumbnailUrl,
         recipe: value,
         time,
         level,
