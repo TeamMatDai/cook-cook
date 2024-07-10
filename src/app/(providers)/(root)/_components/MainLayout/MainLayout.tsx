@@ -2,11 +2,11 @@ import type { StrictPropsWithChildren } from '@/types/common';
 import Header from '../Header';
 import BottomNav from '../BottomNav';
 
-const MainLayout = ({ children, className }: StrictPropsWithChildren<{ className?: string }>) => {
+const MainLayout = ({ children }: StrictPropsWithChildren) => {
   return (
     <>
       <Header />
-      <main className={className}>{children}</main>
+      {children}
       <BottomNav />
     </>
   );
