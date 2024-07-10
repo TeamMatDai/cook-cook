@@ -4,7 +4,7 @@ import MainLayout from '../_components/MainLayout';
 const MyPageLayout = ({ children }: StrictPropsWithChildren) => {
   return (
     <MainLayout>
-      <div className='className="px-[22px] pb-12"'>{children}</div>
+      <div className="px-[22px] pb-12">{children}</div>
     </MainLayout>
   );
 };
