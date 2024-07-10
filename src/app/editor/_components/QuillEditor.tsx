@@ -114,7 +114,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
         placeholder="나만의 레시피를 작성해주세요!"
         value={value}
         onChange={setValue}
-        className="h-40"
+        className="h-96"
       />
     </>
   );

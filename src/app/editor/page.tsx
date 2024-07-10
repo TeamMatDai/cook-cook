@@ -97,26 +97,28 @@ const EditPage = () => {
           placeholder="제목을 입력하세요"
           value={title}
           setValue={setTitle}
-          className="h-20 flex-grow-0 text-[20px] font-semibold border-b border-gray-300"
+          className="h-20 px-3 text-[20px] font-semibold border-b border-gray-300"
         />
         <div className="flex flex-col gap-8 my-8">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <CommentIcon />
             <CommonInput
               placeholder="한 줄 설명을 입력하세요"
               value={subtitle}
               setValue={setSubtitle}
+              className="w-full px-2 py-1"
             />
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <PencilIcon />
             <CommonInput
               placeholder="내용을 입력하세요"
               value={description}
               setValue={setDescription}
+              className="w-full px-2 py-1"
             />
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <PhotoIcon />
             <FileInput fileName={fileName} onChange={handleFileChange} ref={fileInputRef} />
           </div>
