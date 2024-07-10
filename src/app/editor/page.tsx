@@ -3,12 +3,12 @@
 import React, { useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '@/utils/supabase/supabaseClient';
-import QuillEditor from './components/QuillEditor';
-import FileInput from './components/FileInput';
-import TimeInput from './components/TimeInput';
-import LevelSelector from './components/LevelSelector';
-import MaterialList from './components/MaterialList';
-import CommonInput from './components/CommonInput';
+import QuillEditor from './_components/QuillEditor';
+import FileInput from './_components/FileInput';
+import TimeInput from './_components/TimeInput';
+import LevelSelector from './_components/LevelSelector';
+import MaterialList from './_components/MaterialList';
+import CommonInput from './_components/CommonInput';
 
 const EditPage = () => {
   const [title, setTitle] = useState<string>('');
