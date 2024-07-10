@@ -1,0 +1,22 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    /**
+     * 객체를 따로 만들어 tailwind className을 관리할 경우,
+     * 객체 이름에 (Styles | styles)가 포함되면 tailwind의 힌트가 자동으로 제공된다
+     */
+    ["[Ss]tyles \\=([^;]*);", "'([^']*)'"],
+    ["[Ss]tyles \\=([^;]*);", "\"([^\"]*)\""],
+    ["[Ss]tyles \\=([^;]*);", "\\`([^\\`]*)\\`"]
+  ],
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
+}
