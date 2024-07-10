@@ -1,7 +1,8 @@
 import type { StrictPropsWithChildren } from '@/types/common';
+import MainLayout from '../_components/MainLayout';
 
 const MyPageLayout = ({ children }: StrictPropsWithChildren) => {
-  return <main className="px-[22px] pb-12">{children}</main>;
+  return <MainLayout className="px-[22px] pb-12">{children}</MainLayout>;
 };
 
 export default MyPageLayout;
