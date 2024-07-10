@@ -1,4 +1,5 @@
 import React from 'react';
+import TimeIcon from '../../../icons/editor/time.svg';
 
 interface TimeInputProps {
   time: number;
@@ -7,15 +8,16 @@ interface TimeInputProps {
 
 const TimeInput: React.FC<TimeInputProps> = ({ time, setTime }) => (
   <div>
-    <p>소요시간</p>
-    <div className="flex items-center">
+    <p className="w-15 h-4 font-semibold my-5">소요시간</p>
+    <div className="flex items-center gap-2">
+      <TimeIcon />
       <input
         type="number"
         value={time}
         onChange={(e) => setTime(Number(e.target.value))}
-        className="border border-gray-300 p-1 w-20"
+        className="w-14 h-8 text-center justify-center gap-2 rounded-[6px] border border-solid border-[#dbddeb]"
       />
-      <p>분</p>
+      <span>분</span>
     </div>
   </div>
 );

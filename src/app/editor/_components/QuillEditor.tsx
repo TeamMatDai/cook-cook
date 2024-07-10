@@ -77,12 +77,10 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
     () => ({
       toolbar: {
         container: [
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
-          ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-          [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
-          ['link', 'image'],
-          [{ align: [] }, { color: [] }, { background: [] }],
-          ['clean']
+          [{ size: ['small', false, 'large', 'huge'] }],
+          ['bold', 'underline', 'blockquote', 'link', 'image'],
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          [{ align: [] }, { color: [] }, { background: [] }]
         ],
         handlers: {
           image: () => handleImage(quillRef)
@@ -93,15 +91,11 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
   );
 
   const formats = [
-    'header',
+    'size',
     'bold',
-    'italic',
     'underline',
-    'strike',
     'blockquote',
     'list',
-    'bullet',
-    'indent',
     'link',
     'image',
     'align',
@@ -111,7 +105,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
 
   return (
     <>
-      <p>레시피</p>
+      <p className="w-[60px] h-[18px] font-semibold mt-7 mb-4">레시피</p>
       <ReactQuillWrapper
         forwardedRef={quillRef}
         theme="snow"
@@ -120,6 +114,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({ value, setValue }) => {
         placeholder="나만의 레시피를 작성해주세요!"
         value={value}
         onChange={setValue}
+        className="h-40"
       />
     </>
   );

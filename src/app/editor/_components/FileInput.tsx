@@ -7,7 +7,7 @@ interface FileInputProps {
 
 const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({ fileName, onChange }, ref) => (
   <label className="cursor-pointer inline-block">
-    {fileName}
+    <span className="text-[#9CA3B7]">{fileName}</span>
     <input type="file" onChange={onChange} ref={ref} className="hidden" />
   </label>
 ));
