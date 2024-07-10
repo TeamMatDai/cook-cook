@@ -10,22 +10,22 @@ const LevelSelector: React.FC<LevelSelectorProps> = ({ level, setLevel }) => {
     <div>
       <p>난이도</p>
       <button
-        onClick={() => setLevel('쉬움')}
-        style={{ backgroundColor: level === '쉬움' ? 'gray' : 'white' }}
+        onClick={() => setLevel('상')}
+        style={{ backgroundColor: level === '상' ? 'gray' : 'white' }}
       >
-        쉬움
+        상
       </button>
       <button
-        onClick={() => setLevel('보통')}
-        style={{ backgroundColor: level === '보통' ? 'gray' : 'white' }}
+        onClick={() => setLevel('중')}
+        style={{ backgroundColor: level === '중' ? 'gray' : 'white' }}
       >
-        보통
+        중
       </button>
       <button
-        onClick={() => setLevel('어려움')}
-        style={{ backgroundColor: level === '어려움' ? 'gray' : 'white' }}
+        onClick={() => setLevel('하')}
+        style={{ backgroundColor: level === '하' ? 'gray' : 'white' }}
       >
-        어려움
+        하
       </button>
     </div>
   );
