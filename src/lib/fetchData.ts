@@ -1,11 +1,9 @@
 import { createClient } from '@/utils/supabase/supabaseClient';
-import isUUID from 'validator/lib/isUUID';
 
+const supabase = createClient();
 export const getRecipeById = async (id: string) => {
   console.log('@@ id', id);
 
-
-  const supabase = createClient();
   const { data, error } = await supabase.from('recipes').select('*').eq('id', id).single();
 
   if (error) {
@@ -14,4 +12,34 @@ export const getRecipeById = async (id: string) => {
   }
   console.log('Fetched recipe:', data);
   return data;
+};
+
+export const checkBookmark = async (recipesId: string, userId: string) => {
+  const { data, error } = await supabase
+    .from('bookmark')
+    .select('*')
+    .eq('recipesId', recipesId)
+    .eq('userId', userId)
+    .single();
+
+  if (error && error.code !== 'PGRST116') throw new Error(error.message);
+  return data ? true : false;
+};
+
+export const toggleBookmark = async (recipesId: string, userId: string, isBookmarked: boolean) => {
+  if (isBookmarked) {
+    const { error } = await supabase
+      .from('bookmark')
+      .delete()
+      .eq('recipesId', recipesId)
+      .eq('userId', userId);
+
+    if (error) throw new Error(error.message);
+  } else {
+    const { error } = await supabase
+      .from('bookmark')
+      .insert([{ recipesId, userId }]);
+
+    if (error) throw new Error(error.message);
+  }
 };
