@@ -1,20 +1,18 @@
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
-// import { Auth } from '@supabase/auth-ui-react';
-// import { ThemeSupa } from '@supabase/auth-ui-shared';
+import { SupabaseClient, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Kakao from '@/icons/kakao.svg';
 import Google from '@/icons/google.svg';
 
 const AuthLogin = () => {
-  const supabaseClient = useSupabaseClient();
+  const supabaseClient: SupabaseClient = useSupabaseClient();
 
-  const signInWithKakao = async () => {
+  const signInWithKakao = async ():Promise<void> => {
     await supabaseClient.auth.signInWithOAuth({
       provider: 'kakao',
       options: { redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}` }
     });
   };
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async ():Promise<void> => {
     await supabaseClient.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}` }

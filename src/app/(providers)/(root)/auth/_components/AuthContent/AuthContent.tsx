@@ -1,25 +1,23 @@
 'use client';
-
 import { useRouter } from 'next/navigation';
-
 import { useUser } from '@supabase/auth-helpers-react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { SupabaseClient, User, createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import Image from 'next/image';
 
 const AuthContent = () => {
-  const supabase = createClientComponentClient();
+  const supabase: SupabaseClient = createClientComponentClient();
   const router = useRouter();
-  const user = useUser();
-  console.log(user);
+  const user: User | null = useUser();
 
-  const handleAuth = async () => {
+  const handleAuth = async (): Promise<void> => {
     if (user) {
-      const { error } = await supabase.auth.signOut(); //로그아웃
+      const { error } = await supabase.auth.signOut();
 
       if (error) {
         console.error(error);
       }
     }
+
     if (!user) {
       router.push('/auth');
     }
