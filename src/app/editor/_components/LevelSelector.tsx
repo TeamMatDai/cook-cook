@@ -1,39 +1,38 @@
 import React from 'react';
 
+type Level = 'easy' | 'medium' | 'hard';
+
 interface LevelSelectorProps {
-  level: string;
-  setLevel: (level: string) => void;
+  level: Level;
+  setLevel: (level: Level) => void;
 }
 
 const LevelSelector: React.FC<LevelSelectorProps> = ({ level, setLevel }) => {
+  const levelMap: { [key in Level]: string } = {
+    easy: '초급',
+    medium: '중급',
+    hard: '고급'
+  };
+
   return (
     <>
-      <p className="w-15 h-4 font-semibold mt-7 mb-4">난이도</p>
+      <h4 className="w-15 h-4 font-semibold mt-7 mb-4">난이도</h4>
       <div className="flex flex-row gap-[10px]">
-        <button
-          onClick={() => setLevel('고급')}
-          className={`h-10 font-semibold flex flex-row justify-center items-center gap-[10px] py-[10px] px-[16px] rounded-[30px] ${
-            level === '고급' ? 'bg-gray-200' : 'bg-[#f5f5f5]'
-          }`}
-        >
-          고급
-        </button>
-        <button
-          onClick={() => setLevel('중급')}
-          className={`h-10 font-semibold flex flex-row justify-center items-center gap-[10px] py-[10px] px-[16px] rounded-[30px] ${
-            level === '중급' ? 'bg-gray-200' : 'bg-[#f5f5f5]'
-          }`}
-        >
-          중급
-        </button>
-        <button
-          onClick={() => setLevel('초급')}
-          className={`h-10 font-semibold flex flex-row justify-center items-center gap-[10px] py-[10px] px-[16px] rounded-[30px] ${
-            level === '초급' ? 'bg-gray-200' : 'bg-[#f5f5f5]'
-          }`}
-        >
-          초급
-        </button>
+        {Object.keys(levelMap).map((key) => {
+          const currentLevel = key as Level;
+          return (
+            <button
+              key={currentLevel}
+              type="button"
+              onClick={() => setLevel(currentLevel)}
+              className={`h-10 font-semibold flex flex-row justify-center items-center gap-[10px] py-[10px] px-[16px] rounded-[30px] ${
+                level === currentLevel ? 'bg-gray-200' : 'bg-[#f5f5f5]'
+              }`}
+            >
+              {levelMap[currentLevel]}
+            </button>
+          );
+        })}
       </div>
     </>
   );

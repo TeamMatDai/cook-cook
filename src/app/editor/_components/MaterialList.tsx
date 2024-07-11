@@ -1,4 +1,5 @@
 import React from 'react';
+import CommonInput from './CommonInput';
 
 interface Material {
   name: string;
@@ -7,7 +8,7 @@ interface Material {
 
 interface MaterialListProps {
   material: Material[];
-  setMaterial: (material: Material[]) => void;
+  setMaterial: (material: Material[] | ((prevMaterial: Material[]) => Material[])) => void;
 }
 
 const MaterialList: React.FC<MaterialListProps> = ({ material, setMaterial }) => {
@@ -18,33 +19,32 @@ const MaterialList: React.FC<MaterialListProps> = ({ material, setMaterial }) =>
   };
 
   const addMaterial = () => {
-    setMaterial([...material, { name: '', value: '' }]);
+    setMaterial((prevMaterial) => [...prevMaterial, { name: '', value: '' }]);
   };
 
   const handleMaterialDelete = (index: number) => {
-    if (material.length > 1) {
-      const deleteMaterial = material.filter((_, i) => i !== index);
-      setMaterial(deleteMaterial);
+    if (material.length <= 1) {
+      return;
     }
+    const deleteMaterial = material.filter((_, i) => i !== index);
+    setMaterial(deleteMaterial);
   };
 
   return (
-    <div>
-      <p className="w-[60px] h-[18px] font-semibold mt-7 mb-4">기본재료</p>
+    <>
+      <h4 className="w-[60px] h-[18px] font-semibold mt-7 mb-4">기본재료</h4>
       {material.map((materials, index) => (
         <div key={index} className="flex items-center gap-3 mb-2">
-          <input
-            type="text"
+          <CommonInput
             placeholder="재료 이름"
             value={materials.name}
-            onChange={(e) => handleMaterialChange(index, 'name', e.target.value)}
+            setValue={(value) => handleMaterialChange(index, 'name', value)}
             className="w-48 h-12 flex flex-col justify-center rounded-[6px] border border-[#dbddeb] bg-white pl-[16px]"
           />
-          <input
-            type="text"
+          <CommonInput
             placeholder="재료 설명"
             value={materials.value}
-            onChange={(e) => handleMaterialChange(index, 'value', e.target.value)}
+            setValue={(value) => handleMaterialChange(index, 'value', value)}
             className="w-48 h-12 flex flex-col justify-center rounded-[6px] border border-[#dbddeb] bg-white pl-[16px]"
           />
           {material.length > 1 && (
@@ -65,7 +65,7 @@ const MaterialList: React.FC<MaterialListProps> = ({ material, setMaterial }) =>
           + 재료 추가하기
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
