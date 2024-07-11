@@ -7,7 +7,7 @@ import { IconSearch } from '@/icons/IconSearch';
 import { Recipe } from '@/types/recipe';
 import { IconShare } from '@/icons/IconShare';
 import { IconBookmark } from '@/icons/IconBookmark';
-import { Button } from '@/app/detail/_components/Button';
+import { Button } from '@/app/(providers)/(root)/detail/_components/Button';
 
 const DetailPage: React.FC = () => {
   const params = useParams();
