@@ -23,7 +23,6 @@ export const handleSubmit = async (
 
   const { error } = await supabase.from('recipes').insert([
     {
-      id: uuidv4(),
       title: state.title,
       subtitle: state.subtitle,
       description: state.description,

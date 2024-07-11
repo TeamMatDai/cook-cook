@@ -50,18 +50,18 @@ const EditPage: React.FC = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
-    setState({
-      ...state,
+    setState((prevState) => ({
+      ...prevState,
       thumbnail: file,
       fileName: file ? file.name : '썸네일 이미지를 올려주세요'
-    });
+    }));
   };
 
   const handleChange = (key: keyof State, value: any) => {
-    setState({
-      ...state,
-      [key]: value
-    });
+    setState((prevState) => ({
+      ...prevState,
+      [key]: typeof value === 'function' ? value(prevState[key]) : value
+    }));
   };
 
   return (
@@ -105,7 +105,6 @@ const EditPage: React.FC = () => {
           setMaterial={(value) => handleChange('material', value)}
         />
         <QuillEditor value={state.value} setValue={(value) => handleChange('value', value)} />
-        {/* quill 에디터 하단여백 */}
         <div className="h-14" />
       </section>
     </>

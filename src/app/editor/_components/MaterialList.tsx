@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import CommonInput from './CommonInput';
 
 interface Material {
@@ -32,7 +32,7 @@ const MaterialList: React.FC<MaterialListProps> = ({ material, setMaterial }) =>
 
   return (
     <>
-      <h4 className="w-[60px] h-[18px] font-semibold mt-7 mb-4">기본재료</h4>
+      <strong className="w-[60px] h-[18px] font-semibold mt-7 mb-4">기본재료</strong>
       {material.map((materials, index) => (
         <div key={index} className="flex items-center gap-3 mb-2">
           <CommonInput

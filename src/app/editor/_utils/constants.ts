@@ -1,3 +1,5 @@
+import { Level } from '../_components/LevelSelector';
+
 export const FORMATS = [
   'size',
   'bold',
@@ -10,3 +12,11 @@ export const FORMATS = [
   'color',
   'background'
 ];
+
+export const LEVEL_MAP: Record<Level, string> = {
+  easy: '초급',
+  medium: '중급',
+  hard: '고급'
+};
+
+export const LEVELS: Level[] = ['easy', 'medium', 'hard'];
