@@ -15,6 +15,7 @@ const AuthContent = () => {
   const handleAuth = async () => {
     if (user) {
       const { error } = await supabase.auth.signOut(); //로그아웃
+
       if (error) {
         console.error(error);
       }
