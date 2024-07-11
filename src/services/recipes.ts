@@ -5,6 +5,7 @@ import timezone from 'dayjs/plugin/timezone';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
+const RECIPES_CARD_FIELDS = ['title', 'subtitle', 'thumbnail', 'id'];
 
 export const getRecipes = async ({ userId, createdAt }: { userId: string; createdAt: string }) => {
   const supabase = createClient();
@@ -13,7 +14,7 @@ export const getRecipes = async ({ userId, createdAt }: { userId: string; create
 
   const { data, error } = await supabase
     .from('recipes')
-    .select('title, subtitle, thumbnail, id')
+    .select(RECIPES_CARD_FIELDS.join(','))
     .eq('authorId', userId)
     .gte('created_at', createdAtUtc)
     .lte('created_at', endDate);
@@ -56,4 +57,21 @@ export const getWeeklyRecipePresence = async ({
   });
 
   return weekPresence;
+};
+
+export const getPinnedRecipes = async ({ userId }: { userId: string }) => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('bookmark')
+    .select(`created_at, recipes:recipesId (${RECIPES_CARD_FIELDS.join(',')})`)
+    .eq('userId', userId)
+    .order('created_at', { ascending: false });
+
+  console.log(data);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
 };
