@@ -36,7 +36,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (user && request.nextUrl.pathname.startsWith('/auth')) {
-    return NextResponse.redirect(new URL('/user', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   // 로그인하지 않은 사용자가 auth 페이지가 아닌 다른 페이지에 접근하려고 할 때. auth로 리다이렉트
@@ -46,7 +46,7 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // 현재 로그인 상태이면서 경로가 /login 인 경우 홈화면으로 리다이렉트.
+  // 현재 로그인 상태이면서 경로가 /auth 인 경우 홈화면으로 리다이렉트.
   if (user && request.nextUrl.pathname.startsWith('/auth')) {
     return NextResponse.redirect(request.nextUrl.origin);
   }
