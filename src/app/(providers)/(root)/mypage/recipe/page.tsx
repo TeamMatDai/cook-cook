@@ -231,14 +231,11 @@ const MyRecipePage = () => {
             ))}
           </CardList>
         ) : (
-          <Typography
-            as="p"
-            size="sm"
-            weight="light"
-            className="text-center mt-[50px] text-gray-500"
-          >
-            글이 없어요
-          </Typography>
+          <div className="mt-[140px]">
+            <Typography as="p" size="md" className="text-center text-[#999]">
+              글이 없어요
+            </Typography>
+          </div>
         ))}
     </>
   );

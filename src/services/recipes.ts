@@ -39,7 +39,7 @@ export const getWeeklyRecipePresence = async ({
 
   const { data, error } = await supabase
     .from('recipes')
-    .select('id, created_at')
+    .select('created_at')
     .eq('authorId', userId)
     .gte('created_at', startDateUtc)
     .lte('created_at', endDateUtc);
