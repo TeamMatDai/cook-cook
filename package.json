@@ -18,9 +18,9 @@
     "@tanstack/react-query-devtools": "^5.50.1",
     "class-variance-authority": "^0.7.0",
     "dayjs": "^1.11.11",
-    "next": "14.2.4",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "zustand": "^4.5.4"
   },
   "devDependencies": {

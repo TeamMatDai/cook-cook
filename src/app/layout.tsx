@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import Header from '@/components/Header';
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -21,7 +22,15 @@ const AppLayout = ({
 }>) => {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} font-pretendard bg-baseBackground`}>{children}</body>
+      <body
+        className={`font-pretendard ${pretendard.variable} max-w-[500px] mx-auto bg-baseBackground`}
+      >
+        <div className="fixed top-0 left-1/2 w-full max-w-[500px] h-full bg-white transform -translate-x-1/2 z-[-1] pointer-events-none mx-auto" />
+        <QueryProvider>
+          <Header />
+          {children}
+        </QueryProvider>
+      </body>
     </html>
   );
 };
