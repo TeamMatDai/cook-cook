@@ -35,30 +35,21 @@ export async function updateSession(request: NextRequest) {
     data: { user }
   } = await supabase.auth.getUser();
 
-  if (!user && !request.nextUrl.pathname.startsWith('/login')) {
-    // no user, potentially respond by redirecting the user to the login page
+  if (user && request.nextUrl.pathname.startsWith('/auth')) {
+    return NextResponse.redirect(new URL('/user', request.url));
+  }
+
+  // 로그인하지 않은 사용자가 auth 페이지가 아닌 다른 페이지에 접근하려고 할 때. auth로 리다이렉트
+  if (!user && !request.nextUrl.pathname.startsWith('/auth')) {
     const url = request.nextUrl.clone();
-    url.pathname = '/login';
+    url.pathname = '/auth';
     return NextResponse.redirect(url);
   }
 
-  //  현재 로그인 상태이면서 경로가 /login 인 경우 홈화면으로 리다이렉트.
-  if (user && request.nextUrl.pathname.startsWith('/login')) {
+  // 현재 로그인 상태이면서 경로가 /login 인 경우 홈화면으로 리다이렉트.
+  if (user && request.nextUrl.pathname.startsWith('/auth')) {
     return NextResponse.redirect(request.nextUrl.origin);
   }
-
-  // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
-  // creating a new response object with NextResponse.next() make sure to:
-  // 1. Pass the request in it, like so:
-  //    const myNewResponse = NextResponse.next({ request })
-  // 2. Copy over the cookies, like so:
-  //    myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
-  // 3. Change the myNewResponse object to fit your needs, but avoid changing
-  //    the cookies!
-  // 4. Finally:
-  //    return myNewResponse
-  // If this is not done, you may be causing the browser and server to go out
-  // of sync and terminate the user's session prematurely!
 
   return supabaseResponse;
 }

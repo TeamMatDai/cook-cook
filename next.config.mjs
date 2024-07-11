@@ -6,7 +6,13 @@ const nextConfig = {
       use: ['@svgr/webpack']
     });
     return config;
-  }
+  },
+    images: {
+    remotePatterns: [
+      { hostname: "k.kakaocdn.net" },
+      { hostname: "lh3.googleusercontent.com" },
+    ],
+  },
 };
 
 export default nextConfig;
