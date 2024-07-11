@@ -6,13 +6,19 @@ interface Material {
   value: string;
 }
 
+interface HandleMaterial {
+  index: number;
+  field: string;
+  value: string;
+}
+
 interface MaterialListProps {
   material: Material[];
   setMaterial: (material: Material[] | ((prevMaterial: Material[]) => Material[])) => void;
 }
 
-const MaterialList: React.FC<MaterialListProps> = ({ material, setMaterial }) => {
-  const handleMaterialChange = (index: number, field: string, value: string) => {
+const MaterialList = ({ material, setMaterial }: MaterialListProps) => {
+  const handleMaterialChange = ({ index, field, value }: HandleMaterial) => {
     const newMaterial = [...material];
     newMaterial[index] = { ...newMaterial[index], [field]: value };
     setMaterial(newMaterial);
@@ -38,13 +44,13 @@ const MaterialList: React.FC<MaterialListProps> = ({ material, setMaterial }) =>
           <CommonInput
             placeholder="재료 이름"
             value={materials.name}
-            setValue={(value) => handleMaterialChange(index, 'name', value)}
+            setValue={(value) => handleMaterialChange({ index, field: 'name', value })}
             className="w-48 h-12 flex flex-col justify-center rounded-[6px] border border-[#dbddeb] bg-white pl-[16px]"
           />
           <CommonInput
             placeholder="재료 설명"
             value={materials.value}
-            setValue={(value) => handleMaterialChange(index, 'value', value)}
+            setValue={(value) => handleMaterialChange({ index, field: 'value', value })}
             className="w-48 h-12 flex flex-col justify-center rounded-[6px] border border-[#dbddeb] bg-white pl-[16px]"
           />
           {material.length > 1 && (

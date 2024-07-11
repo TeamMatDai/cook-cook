@@ -7,7 +7,7 @@ interface CommonInputProps {
   className?: string;
 }
 
-const CommonInput: React.FC<CommonInputProps> = ({ placeholder, value, setValue, className }) => {
+const CommonInput = ({ placeholder, value, setValue, className }: CommonInputProps) => {
   return (
     <input
       type="text"

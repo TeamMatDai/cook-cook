@@ -1,12 +1,15 @@
 import { supabase } from '@/utils/supabase/supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
-import { initialState, State } from '../page';
+import { INITIALSTATE } from '../page';
+import { State } from '../_types/editorInput';
 
-export const handleSubmit = async (
-  state: State,
-  setState: React.Dispatch<React.SetStateAction<State>>,
-  fileInputRef: React.MutableRefObject<HTMLInputElement | null>
-) => {
+interface handleSubmitProps {
+  state: State;
+  setState: React.Dispatch<React.SetStateAction<State>>;
+  fileInputRef: React.MutableRefObject<HTMLInputElement | null>;
+}
+
+export const handleSubmit = async ({ state, setState, fileInputRef }: handleSubmitProps) => {
   let thumbnailUrl = '';
 
   if (state.thumbnail) {
@@ -39,7 +42,7 @@ export const handleSubmit = async (
     return;
   }
 
-  setState(() => initialState);
+  setState(INITIALSTATE);
   if (fileInputRef.current) {
     fileInputRef.current.value = '';
   }

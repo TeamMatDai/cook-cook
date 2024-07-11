@@ -6,7 +6,7 @@ interface TimeInputProps {
   setTime: (value: number) => void;
 }
 
-const TimeInput: React.FC<TimeInputProps> = ({ time, setTime }) => (
+const TimeInput = ({ time, setTime }: TimeInputProps) => (
   <>
     <p className="w-15 h-4 font-semibold my-5">소요시간</p>
     <div className="flex items-center gap-2">

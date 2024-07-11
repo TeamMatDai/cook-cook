@@ -4,7 +4,7 @@ interface HeaderProps {
   onSubmit: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onSubmit }) => (
+const Header = ({ onSubmit }: HeaderProps) => (
   <header className="flex justify-between items-center border-b border-gray-300 px-6 py-4 gap-5 font-semibold mb-3">
     <button>
       <BackIcon />

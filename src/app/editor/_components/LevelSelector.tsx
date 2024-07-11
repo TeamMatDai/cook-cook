@@ -1,16 +1,16 @@
 import React from 'react';
 import { LEVEL_MAP, LEVELS } from '../_utils/constants';
+import { Level } from '../_types/editorInput';
 
-export type Level = 'easy' | 'medium' | 'hard';
 interface LevelSelectorProps {
   level: Level;
   setLevel: (level: Level) => void;
 }
 
-const LevelSelector: React.FC<LevelSelectorProps> = ({ level, setLevel }) => {
+const LevelSelector = ({ level, setLevel }: LevelSelectorProps) => {
   return (
     <>
-      <h4 className="w-15 h-4 font-semibold mt-7 mb-4">난이도</h4>
+      <strong className="w-15 h-4 font-semibold mt-7 mb-4">난이도</strong>
       <div className="flex flex-row gap-[10px]">
         {LEVELS.map((currentLevel) => (
           <button

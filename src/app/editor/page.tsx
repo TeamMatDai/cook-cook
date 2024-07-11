@@ -12,27 +12,9 @@ import PencilIcon from '../../icons/editor/pencil.svg';
 import PhotoIcon from '../../icons/editor/photo.svg';
 import Header from './_components/Header';
 import { handleSubmit } from './_utils/handleSubmit';
+import { State } from './_types/editorInput';
 
-type Level = 'easy' | 'medium' | 'hard';
-
-interface Material {
-  name: string;
-  value: string;
-}
-
-export interface State {
-  title: string;
-  subtitle: string;
-  description: string;
-  time: number;
-  material: Material[];
-  thumbnail: File | null;
-  fileName: string;
-  level: Level;
-  value: string;
-}
-
-export const initialState: State = {
+export const INITIALSTATE: State = {
   title: '',
   subtitle: '',
   description: '',
@@ -44,8 +26,8 @@ export const initialState: State = {
   value: ''
 };
 
-const EditPage: React.FC = () => {
-  const [state, setState] = useState<State>(initialState);
+const EditPage = () => {
+  const [state, setState] = useState<State>(INITIALSTATE);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +39,10 @@ const EditPage: React.FC = () => {
     }));
   };
 
-  const handleChange = (key: keyof State, value: any) => {
+  const handleChange = <K extends keyof State>(
+    key: K,
+    value: State[K] | ((prev: State[K]) => State[K])
+  ) => {
     setState((prevState) => ({
       ...prevState,
       [key]: typeof value === 'function' ? value(prevState[key]) : value
@@ -66,7 +51,7 @@ const EditPage: React.FC = () => {
 
   return (
     <>
-      <Header onSubmit={() => handleSubmit(state, setState, fileInputRef)} />
+      <Header onSubmit={() => handleSubmit({ state, setState, fileInputRef })} />
       <section className="flex flex-col ml-5 mr-5 mb-10">
         <CommonInput
           placeholder="제목을 입력하세요"
