@@ -6,6 +6,7 @@ import { IconSearch } from '@/icons/IconSearch';
 import { Recipe } from '@/types/recipe';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import RecipeSection from '@/app/(providers)/(root)/detail/_components/RecipeSection';
+import Link from 'next/link';
 
 const DetailPage: React.FC= () => {
   const params = useParams();
@@ -21,8 +22,8 @@ const DetailPage: React.FC= () => {
     enabled: !!id
   });
 
-  if (isPending) return <div>Loading...</div>;
-  if (error) return <div>Error loading recipe</div>;
+  if (isPending) return <div>로딩중</div>;
+  if (error) return <div>로딩중 에러 발생</div>;
 
   return (
     <>
@@ -31,8 +32,13 @@ const DetailPage: React.FC= () => {
         style={{ backgroundImage: `url(${recipe?.thumbnail})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <header className="h-[80px] flex flex-row justify-between items-center px-[2px]">
-          <IconBackButton />
-          <IconSearch />
+          <Link href='/'>
+            <IconBackButton />
+          </Link>
+          {/*TODO: 검색페이지 링크 추가하기*/}
+          <Link href='/'>
+            <IconSearch />
+          </Link>
         </header>
       </article>
       {recipe && <RecipeSection recipe={recipe} />}
