@@ -1,5 +1,5 @@
 import React from 'react';
-import TimeIcon from '../../../icons/editor/time.svg';
+import TimeIcon from '@/icons/editor/time.svg';
 
 interface TimeInputProps {
   time: number;
