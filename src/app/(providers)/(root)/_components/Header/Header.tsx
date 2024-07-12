@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import LogoIcon from '@/icons/header-logo.svg';
 import SearchIcon from '@/icons/header-search.svg';
 
@@ -21,9 +21,7 @@ const Header = () => {
       <div className="h-[40px] flex justify-between items-center">
         <h1>
           <Link href="/search">
-            <a>
-              <LogoIcon className="w-[118px] h-[31.3px] cursor-pointer" />
-            </a>
+            <LogoIcon className="w-[118px] h-[31.3px] cursor-pointer" />
           </Link>
         </h1>
         <div className="relative w-full max-w-xs ml-4">
