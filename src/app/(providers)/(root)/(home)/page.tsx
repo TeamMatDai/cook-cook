@@ -1,5 +1,6 @@
 'use client';
 import { useCounterStore } from '@/providers/CounterStoreProvider';
+import AuthContent from '../auth/_components/AuthContent/AuthContent';
 
 const Home = () => {
   const { count, incrementCount, decrementCount } = useCounterStore((state) => state);
@@ -18,6 +19,7 @@ const Home = () => {
           Decrement Count
         </button>
       </div>
+      <AuthContent />
     </div>
   );
 };

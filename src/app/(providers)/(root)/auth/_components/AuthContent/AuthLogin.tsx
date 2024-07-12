@@ -5,23 +5,24 @@ import Google from '@/icons/google.svg';
 const AuthLogin = () => {
   const supabaseClient: SupabaseClient = useSupabaseClient();
 
-  const signInWithKakao = async ():Promise<void> => {
+  const signInWithKakao = async () => {
     await supabaseClient.auth.signInWithOAuth({
       provider: 'kakao',
-      options: { redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}` }
+      options: { redirectTo: `http://localhost:3000` }
     });
   };
 
-  const signInWithGoogle = async ():Promise<void> => {
+  const signInWithGoogle = async () => {
     await supabaseClient.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}` }
+      options: { redirectTo: `http://localhost:3000` }
     });
   };
 
   return (
     <div className="flex flex-col justify-center items-center mb-10">
       <button
+        type="button"
         onClick={signInWithKakao}
         className="w-[399px] h-[50px] flex-grow-0 flex flex-row justify-center items-center gap-[10px] m-[0_0_10px] p-[10px_24px] rounded-[12px] bg-[#ffe812] text-[14px] font-bold text-black"
       >
@@ -29,6 +30,7 @@ const AuthLogin = () => {
       </button>
 
       <button
+        type="button"
         onClick={signInWithGoogle}
         className="w-[399px] h-[50px] flex-grow-0 flex flex-row justify-center items-center gap-[10px] m-[0_0_10px] p-[10px_24px] rounded-[12px] bg-[#fff] text-[14px] font-bold text-black"
       >

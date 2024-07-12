@@ -8,19 +8,20 @@ const AuthContent = () => {
   const supabase: SupabaseClient = createClientComponentClient();
   const router = useRouter();
   const user: User | null = useUser();
+  console.log(user);
 
-  const handleAuth = async (): Promise<void> => {
+  const handleAuth = async () => {
     if (user) {
       const { error } = await supabase.auth.signOut();
 
       if (error) {
-        console.error(error);
+        alert(error.message);
       }
+
+      return;
     }
 
-    if (!user) {
-      router.push('/auth');
-    }
+    router.push('/auth');
   };
 
   return (
