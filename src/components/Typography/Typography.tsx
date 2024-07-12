@@ -11,7 +11,7 @@ type TypographyProps = PropsWithChildren &
 const typographyClass = cva('', {
   variants: {
     weight: {
-      regular: 'font-regular',
+      normal: 'font-normal',
       bold: 'font-bold',
       semibold: 'font-semibold',
       medium: 'font-medium',
@@ -25,14 +25,14 @@ const typographyClass = cva('', {
     }
   },
   defaultVariants: {
-    weight: 'regular',
+    weight: 'normal',
     size: 'md'
   }
 });
 
 const Typography = ({
   as: Component = 'div',
-  weight = 'regular',
+  weight = 'normal',
   size = 'md',
   className,
   children,

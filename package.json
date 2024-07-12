@@ -20,6 +20,7 @@
     "dompurify": "^3.1.6",
     "react-quill": "^2.0.0",
     "uuid": "^10.0.0",
+    "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "dayjs": "^1.11.11",
     "next": "14.2.4",
