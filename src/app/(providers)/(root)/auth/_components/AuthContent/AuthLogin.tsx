@@ -8,14 +8,14 @@ const AuthLogin = () => {
   const signInWithKakao = async () => {
     await supabaseClient.auth.signInWithOAuth({
       provider: 'kakao',
-      options: { redirectTo: `http://localhost:3000` }
+      options: { redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}` }
     });
   };
 
   const signInWithGoogle = async () => {
     await supabaseClient.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: `http://localhost:3000` }
+      options: { redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}` }
     });
   };
 
