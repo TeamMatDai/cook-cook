@@ -1,3 +1,4 @@
+// TODO: user정보 받아와서 로직 짜기
 const UserInfo = () => {
   return (
     <div className="flex flex-col gap-[50px] justify-center items-center">

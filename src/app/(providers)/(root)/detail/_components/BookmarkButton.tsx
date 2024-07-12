@@ -5,6 +5,7 @@ interface BookmarkButtonProps {
   recipesId: string;
 }
 
+// TODO: 북마크기능 로직 리펙토링 필요
 const BookmarkButton: React.FC<BookmarkButtonProps> = ({ recipesId }) => {
   // const [isBookmarked, setIsBookmarked] = useState(false);
   const userId = '2a96a3df-867c-4be3-af54-f411dd2634fa'; // 임시 사용자 ID
@@ -106,6 +107,7 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({ recipesId }) => {
   // };
 
   return (
+    // TODO: 북마크 버튼 스타일링 필요
     <button className='rounded-lg w-[66px] h-[66px] flex flex-col gap-2 justify-center items-center border border-lightgray' onClick={handleBookmark}>
       <IconBookmark />
       {isBookmarked ? '해제' : '북마크'}
