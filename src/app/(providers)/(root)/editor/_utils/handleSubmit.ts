@@ -2,6 +2,7 @@ import { supabase } from '@/utils/supabase/supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
 import { INITIALSTATE } from '../page';
 import { State } from '../_types/editorInput';
+import showSwal from '@/utils/swal';
 
 interface handleSubmitProps {
   state: State;
@@ -10,6 +11,22 @@ interface handleSubmitProps {
 }
 
 export const handleSubmit = async ({ state, setState, fileInputRef }: handleSubmitProps) => {
+  if (
+    state.title.trim() === '' ||
+    state.subtitle.trim() === '' ||
+    state.description.trim() === '' ||
+    state.value.trim() === '' ||
+    state.material.some((item) => item.name.trim() === '' || item.value.trim() === '')
+  ) {
+    showSwal({ icon: 'warning', title: '모든 입력칸을 작성해주세요.' });
+    return;
+  }
+
+  if (!state.thumbnail) {
+    showSwal({ icon: 'warning', title: '썸네일을 업로드 해주세요.' });
+    return;
+  }
+
   let thumbnailUrl = '';
 
   if (state.thumbnail) {
