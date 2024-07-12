@@ -1,5 +1,5 @@
 'use client';
-import AuthLogin from '@/app/(providers)/(root)/auth/_components/AuthContent/AuthLogin';
+import AuthLogin from '@/app/(providers)/(root)/login/_components/AuthLogin';
 import Background from '../../../../../public/loginBackground.png';
 import CookcookLogo from '@/icons/cookcookLogo.svg';
 import Image from 'next/image';
