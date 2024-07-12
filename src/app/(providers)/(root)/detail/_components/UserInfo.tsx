@@ -2,6 +2,7 @@
 const UserInfo = () => {
   return (
     <div className="flex flex-col gap-[50px] justify-center items-center">
+      {/*TODO: next image로 변경필요!!!*/}
       <img
         className="w-[50px] h-[50px] rounded-full overflow-hidden object-cover"
         src="https://scontent-nrt1-2.xx.fbcdn.net/v/t1.6435-9/66059442_2275758249307701_5758914269005479936_n.png?_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=8dsZHav4tcgQ7kNvgEUja4v&_nc_ht=scontent-nrt1-2.xx&oh=00_AYCsT_OzCYO6ORnFoxxnBin-78EpvKcNJZoR7OivDeVBzw&oe=66B59DE5"
