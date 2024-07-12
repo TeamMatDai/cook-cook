@@ -1,4 +1,4 @@
-import { Level } from '../_components/LevelSelector';
+import { Level } from '../_types/editorInput';
 
 export const FORMATS = [
   'size',

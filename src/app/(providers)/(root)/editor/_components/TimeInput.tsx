@@ -1,4 +1,3 @@
-import React from 'react';
 import TimeIcon from '@/icons/editor/time.svg';
 
 interface TimeInputProps {

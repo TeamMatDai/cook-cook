@@ -1,9 +1,5 @@
+import { Material } from '../_types/editorInput';
 import CommonInput from './CommonInput';
-
-interface Material {
-  name: string;
-  value: string;
-}
 
 interface HandleMaterial {
   index: number;
