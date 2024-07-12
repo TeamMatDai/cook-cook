@@ -5,7 +5,7 @@ import BookmarkButton from '@/app/(providers)/(root)/detail/_components/Bookmark
 import UserInfo from '@/app/(providers)/(root)/detail/_components/UserInfo';
 import IngredientsSection from '@/app/(providers)/(root)/detail/_components/IngredientsSection';
 
-const RecipeSection: React.FC<{recipe: Recipe}> = ({ recipe }) => {
+const RecipeSection: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
   return (
     <div className="relative px-6">
       <article className="-mt-16 mb-[72px] flex flex-col gap-[38px]">
@@ -13,12 +13,10 @@ const RecipeSection: React.FC<{recipe: Recipe}> = ({ recipe }) => {
           <h3 className="text-[20px] text-gray-600">{recipe.subtitle}</h3>
           <h1 className="text-[52px] text-black font-extrabold">{recipe.title}</h1>
           <div className="text-lg text-gray-600">
-            {recipe.time}분 · {recipe.level}
+            {recipe.time}분 &middot; {recipe.level}
           </div>
         </div>
-        <p className="text-xl text-gray-600 leading-normal break-keep">
-          {recipe.description}
-        </p>
+        <p className="text-xl text-gray-600 leading-normal break-keep">{recipe.description}</p>
       </article>
       <IngredientsSection materials={recipe.material} />
       <RecipeInstructionsSection recipe={recipe} />
@@ -29,5 +27,5 @@ const RecipeSection: React.FC<{recipe: Recipe}> = ({ recipe }) => {
       <UserInfo />
     </div>
   );
-}
+};
 export default RecipeSection;
