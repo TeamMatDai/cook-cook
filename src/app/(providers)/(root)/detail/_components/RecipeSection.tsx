@@ -7,7 +7,7 @@ import IngredientsSection from '@/app/(providers)/(root)/detail/_components/Ingr
 
 const RecipeSection: React.FC<{recipe: Recipe}> = ({ recipe }) => {
   return (
-    <div className="px-6">
+    <div className="relative px-6">
       <article className="-mt-16 mb-[72px] flex flex-col gap-[38px]">
         <div>
           <h3 className="text-[20px] text-gray-600">{recipe.subtitle}</h3>
