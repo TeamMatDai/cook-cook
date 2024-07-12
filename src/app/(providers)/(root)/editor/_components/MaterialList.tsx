@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import CommonInput from './CommonInput';
 
 interface Material {
