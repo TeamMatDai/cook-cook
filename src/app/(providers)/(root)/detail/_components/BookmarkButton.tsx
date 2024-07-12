@@ -1,3 +1,4 @@
+'use client';
 import { IconBookmark } from '@/icons/IconBookmark';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addBookmark, checkBookmark, removeBookmark } from '@/lib/fetchData';
@@ -8,13 +9,17 @@ interface BookmarkButtonProps {
 // TODO: 북마크기능 로직 리펙토링 필요
 const BookmarkButton: React.FC<BookmarkButtonProps> = ({ recipesId }) => {
   // const [isBookmarked, setIsBookmarked] = useState(false);
-  const userId = '2a96a3df-867c-4be3-af54-f411dd2634fa'; // 임시 사용자 ID
+  const userId = '6619b5b3-4fcc-4b55-a9c9-2bd7688b8614'; // 임시 사용자 ID
   const queryClient = useQueryClient();
 
-  const { data: isBookmarked, isLoading, error } = useQuery({
+  const {
+    data: isBookmarked,
+    isLoading,
+    error
+  } = useQuery({
     queryKey: ['bookmark', recipesId, userId],
     queryFn: () => checkBookmark(recipesId, userId),
-    enabled: !!recipesId && !!userId,
+    enabled: !!recipesId && !!userId
   });
 
   const addBookmarkMutation = useMutation({
@@ -36,7 +41,7 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({ recipesId }) => {
     },
     onSettled: () => {
       queryClient.invalidateQueries(['bookmark', recipesId, userId]);
-    },
+    }
   });
 
   const removeBookmarkMutation = useMutation({
@@ -58,7 +63,7 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({ recipesId }) => {
     },
     onSettled: () => {
       queryClient.invalidateQueries(['bookmark', recipesId, userId]);
-    },
+    }
   });
 
   const handleBookmark = async () => {
@@ -69,46 +74,20 @@ const BookmarkButton: React.FC<BookmarkButtonProps> = ({ recipesId }) => {
 
     if (isBookmarked) {
       removeBookmarkMutation.mutate();
-    } else {
-      addBookmarkMutation.mutate();
+      return;
     }
+    addBookmarkMutation.mutate();
   };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading bookmark status</div>;
 
-
-  // useEffect(() => {
-  //   const fetchBookmarkStatus = async () => {
-  //     if (userId && recipeId) {
-  //       try {
-  //         const status = await checkBookmark(recipeId, userId);
-  //         setIsBookmarked(status);
-  //       } catch (error) {
-  //         console.error('@@BOOKMARK STATUS ERROR:', error);
-  //       }
-  //     }
-  //   };
-  //
-  //   fetchBookmarkStatus();
-  // }, [recipeId, userId]);
-  //
-  // const handleBookmark = async () => {
-  //   if (!userId) {
-  //     alert('로그인이 필요합니다.');
-  //     return;
-  //   }
-  //   try {
-  //     await toggleBookmark(recipeId, userId, isBookmarked);
-  //     setIsBookmarked(!isBookmarked);
-  //   } catch (error) {
-  //     console.error('@@BOOKMARK TOGGLE ERROR:', error);
-  //   }
-  // };
-
   return (
     // TODO: 북마크 버튼 스타일링 필요
-    <button className='rounded-lg w-[66px] h-[66px] flex flex-col gap-2 justify-center items-center border border-lightgray' onClick={handleBookmark}>
+    <button
+      className="rounded-lg w-[66px] h-[66px] flex flex-col gap-2 justify-center items-center border border-lightgray"
+      onClick={handleBookmark}
+    >
       <IconBookmark />
       {isBookmarked ? '해제' : '북마크'}
     </button>
