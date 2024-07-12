@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { RecipesSwiper } from '@/components/RecipesSwiper';
-import { fetchRecipes } from '@/utils/supabase/fetchRecipes';
+import { fetchRandomRecipes } from '@/utils/supabase/fetchRecipes';
 
 const Page = () => {
   const [recipes, setRecipes] = useState<
@@ -10,27 +10,27 @@ const Page = () => {
   >([]);
 
   useEffect(() => {
-    const getRecipes = async () => {
-      const data = await fetchRecipes();
+    const getRandomRecipes = async () => {
+      const data = await fetchRandomRecipes();
       setRecipes(data);
     };
 
-    getRecipes();
+    getRandomRecipes();
   }, []);
 
   return (
     <>
       <section className="mb-8">
         <h2 className="text-xl font-bold mb-4">예린님, 오늘 이 요리 어때요?</h2>
-        <RecipesSwiper recipes={recipes.slice(0, 2)} />
+        <RecipesSwiper recipes={recipes} />
       </section>
       <section className="mb-8">
         <h2 className="text-xl font-bold mb-4">새로 올라온 레시피 ✨</h2>
-        <RecipesSwiper recipes={recipes.slice(2, 4)} />
+        <RecipesSwiper recipes={recipes} />
       </section>
       <section>
         <h2 className="text-xl font-bold mb-4">인기 레시피 🔥</h2>
-        <RecipesSwiper recipes={recipes.slice(2)} />
+        <RecipesSwiper recipes={recipes} />
       </section>
     </>
   );
