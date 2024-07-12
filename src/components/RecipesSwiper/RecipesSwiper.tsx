@@ -1,31 +1,22 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { CardDescription, CardImage, CardItem, CardList, CardTitle } from '@/components/Card';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-import { CardItem } from '@/components/Card/Card';
-
-SwiperCore.use([Navigation, Pagination]);
 
 const RecipesSwiper = ({ recipes }) => {
   return (
     <Swiper
       spaceBetween={50}
       slidesPerView={1}
-      navigation
-      pagination={{ clickable: true }}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
     >
       {recipes.map((recipe, index) => (
         <SwiperSlide key={index}>
-          <CardItem
-            href="#"
-            title={recipe.title}
-            description={recipe.description}
-            image={recipe.thumbnail}
-            isOverlayCard={false}
-          />
+          <CardItem href="/" as="div">
+            <CardImage src={recipe.thumbnail} />
+            <CardTitle>{recipe.title}</CardTitle>
+            <CardDescription>{recipe.description}</CardDescription>
+          </CardItem>
         </SwiperSlide>
       ))}
     </Swiper>
