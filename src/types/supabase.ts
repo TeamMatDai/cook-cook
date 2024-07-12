@@ -9,23 +9,116 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      test: {
+      bookmark: {
         Row: {
-          content: string | null
           created_at: string
           id: number
+          recipesId: number
+          userId: string | null
         }
         Insert: {
-          content?: string | null
           created_at?: string
           id?: number
+          recipesId?: number
+          userId?: string | null
         }
         Update: {
-          content?: string | null
           created_at?: string
           id?: number
+          recipesId?: number
+          userId?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "bookmark_recipesId_fkey"
+            columns: ["recipesId"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recipes: {
+        Row: {
+          authorId: string | null
+          created_at: string
+          description: string
+          id: number
+          level: string
+          material: Json[]
+          recipe: string
+          subtitle: string
+          thumbnail: string
+          time: number
+          title: string
+        }
+        Insert: {
+          authorId?: string | null
+          created_at?: string
+          description: string
+          id?: number
+          level: string
+          material: Json[]
+          recipe: string
+          subtitle: string
+          thumbnail: string
+          time: number
+          title: string
+        }
+        Update: {
+          authorId?: string | null
+          created_at?: string
+          description?: string
+          id?: number
+          level?: string
+          material?: Json[]
+          recipe?: string
+          subtitle?: string
+          thumbnail?: string
+          time?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipes_authorId_fkey1"
+            columns: ["authorId"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string | null
+          thumbnail: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id: string
+          name?: string | null
+          thumbnail?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string | null
+          thumbnail?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
