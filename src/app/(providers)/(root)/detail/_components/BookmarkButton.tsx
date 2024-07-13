@@ -2,6 +2,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import IconBookmark from '@/icons/bookmark.svg';
 import { addBookmark, checkBookmark, removeBookmark } from '@/services/bookmark';
+import showSwal from '@/utils/swal';
+import Loader from '../_components/Loader';
+import ErrorPage from '../_components/ErrorPage';
 interface BookmarkButtonProps {
   recipesId: string;
 }
@@ -36,7 +39,7 @@ const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
       if (context?.previousBookmark) {
         queryClient.setQueryData(['bookmark', recipesId], context.previousBookmark);
       }
-      alert('북마크 추가 에러');
+      showSwal({ icon: 'warning', title: '북마크 추가 에러' });
     },
     onSettled: () => {
       queryClient.invalidateQueries(['bookmark', recipesId]);
@@ -57,7 +60,8 @@ const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
     onError: (err, newBookmark, context: any) => {
       if (context?.previousBookmark) return;
       queryClient.setQueryData(['bookmark', recipesId], context.previousBookmark);
-      alert('북마크 해제 에러');
+      showSwal({ icon: 'warning', title: '북마크 해제 에러' });
+
     },
     onSettled: () => {
       queryClient.invalidateQueries(['bookmark', recipesId]);
@@ -66,7 +70,7 @@ const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
 
   const handleBookmark = async () => {
     if (!userId) {
-      alert('로그인이 필요합니다.');
+      showSwal({ icon: 'warning', title: '로그인이 필요합니다.' });
       return;
     }
 
@@ -77,11 +81,10 @@ const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
     addBookmarkMutation.mutate();
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading bookmark status</div>;
+  if (isLoading) return <Loader/>;
+  if (error) return <ErrorPage message={'북마크 에러가 발생하였습니다.'}/>;
 
   return (
-    // TODO: 북마크 버튼 스타일링 필요
     <button
       className={`rounded-lg w-[66px] h-[66px] flex flex-col gap-2 justify-center items-center border ${
         isBookmarked ? 'text-black border-black' : 'border-lightgray'
