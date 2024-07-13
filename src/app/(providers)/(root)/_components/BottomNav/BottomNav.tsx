@@ -22,15 +22,17 @@ const BottomNav = () => {
   const currentPath = usePathname();
 
   return (
-    <nav className={styles.nav}>
-      <ul className={styles.ul}>
+    <nav
+      className={`fixed bottom-0 left-1/2 transform -translate-x-1/2 bg-white z-50 ${LAYOUT.CONTAINER_MAX_WIDTH} w-full ${LAYOUT.BOTTOM_NAV_HEIGHT} border-t border-[#F1F1F1]`}
+    >
+      <ul className="grid grid-cols-5 h-full">
         {NAV_ITEMS.map(({ href, component: Component, label, exact }, index) => {
           const isActive = exact ? currentPath === href : currentPath.includes(href);
 
           return (
-            <li key={index} className={styles.li}>
-              <Link href={href} className={styles.link}>
-                <div className={styles.icon}>
+            <li key={index} className="flex flex-col items-center justify-center flex-1">
+              <Link href={href} className="flex flex-col items-center justify-center w-full h-full">
+                <div className="h-6 flex items-center">
                   <Component className={iconClass({ isActive })} />
                 </div>
                 <span className={textClass({ isActive })}>{label}</span>
@@ -60,26 +62,5 @@ const textClass = cva('text-[13px] font-medium', {
     }
   }
 });
-
-const styles = {
-  nav: [
-    'fixed',
-    'bottom-0',
-    'left-1/2',
-    'transform',
-    '-translate-x-1/2',
-    'bg-white',
-    'z-50',
-    LAYOUT.CONTAINER_MAX_WIDTH,
-    'w-full',
-    LAYOUT.BOTTOM_NAV_HEIGHT,
-    'border-t',
-    'border-[#F1F1F1]'
-  ].join(' '),
-  ul: ['grid', 'grid-cols-5', 'h-full'].join(' '),
-  li: ['flex', 'flex-col', 'items-center', 'justify-center', 'flex-1'].join(' '),
-  link: ['flex', 'flex-col', 'items-center', 'justify-center', 'w-full', 'h-full'].join(' '),
-  icon: ['h-6', 'flex', 'items-center'].join(' ')
-};
 
 export default BottomNav;
