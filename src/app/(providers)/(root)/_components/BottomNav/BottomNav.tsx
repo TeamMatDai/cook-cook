@@ -69,7 +69,7 @@ const styles = {
     'transform',
     '-translate-x-1/2',
     'bg-white',
-    'z-100',
+    'z-50',
     LAYOUT.CONTAINER_MAX_WIDTH,
     'w-full',
     LAYOUT.BOTTOM_NAV_HEIGHT,

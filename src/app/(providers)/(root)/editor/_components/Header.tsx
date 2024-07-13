@@ -13,7 +13,7 @@ const Header = ({ onSubmit }: HeaderProps) => {
   };
 
   return (
-    <header className="flex justify-between items-center border-b border-gray-300 px-6 py-4 gap-5 font-semibold mb-3">
+    <header className="sticky top-0 z-50 flex justify-between items-center border-b border-[#f1f1f1] px-6 py-4 gap-5 font-semibold mb-3 bg-white">
       <button onClick={handleBack}>
         <BackIcon />
       </button>

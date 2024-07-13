@@ -17,14 +17,14 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 w-full flex flex-col justify-start gap-2 pt-[15px] px-[16px] pb-0 border-b border-[#f1f1f1] bg-white z-10">
-      <div className="h-[40px] flex justify-between items-center">
+    <header className="sticky top-0 w-full flex flex-col justify-start gap-2 pt-[15px] px-[16px] pb-0 border-b border-[#f1f1f1] bg-white z-50">
+      <div className="h-[40px] flex gap-4 justify-between items-center">
         <h1>
           <Link href="/">
-            <LogoIcon className="cursor-pointer" />
+            <LogoIcon className="cursor-pointer" alt="cook cook" />
           </Link>
         </h1>
-        <div className="relative w-full max-w-xs ml-4">
+        <div className="relative w-full flex-grow">
           <input
             type="text"
             placeholder="지금 뭐 먹지?"
@@ -41,7 +41,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <nav className="flex justify-around items-center mt-2">
+      <nav className="flex justify-around items-center h-[46px]">
         <Link href="/best" className="text-[15px] font-medium text-[#000]">
           베스트
         </Link>
