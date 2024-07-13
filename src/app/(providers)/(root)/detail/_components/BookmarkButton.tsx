@@ -83,10 +83,12 @@ const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
   return (
     // TODO: 북마크 버튼 스타일링 필요
     <button
-      className="rounded-lg w-[66px] h-[66px] flex flex-col gap-2 justify-center items-center border border-lightgray"
+      className={`rounded-lg w-[66px] h-[66px] flex flex-col gap-2 justify-center items-center border ${
+        isBookmarked ? 'text-black border-black' : 'border-lightgray'
+      }`}
       onClick={handleBookmark}
     >
-      <IconBookmark />
+      <IconBookmark className={`${isBookmarked && 'text-black fill-current'}`} />
       {isBookmarked ? '해제' : '북마크'}
     </button>
   );
