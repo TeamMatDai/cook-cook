@@ -11,7 +11,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        baseBackground: '#f9f9f9'
+        baseBackground: '#f9f9f9',
+        'swal-confirm': 'rgb(189 189 189)'
       },
       fontFamily: {
         pretendard: ['var(--font-pretendard)']
