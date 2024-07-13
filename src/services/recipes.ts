@@ -17,7 +17,8 @@ export const getRecipes = async ({ userId, createdAt }: { userId: string; create
     .select(RECIPES_CARD_FIELDS.join(','))
     .eq('authorId', userId)
     .gte('created_at', createdAtUtc)
-    .lte('created_at', endDate);
+    .lte('created_at', endDate)
+    .order('created_at', { ascending: false });
 
   if (error) {
     throw new Error(error.message);

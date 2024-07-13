@@ -1,16 +1,15 @@
 'use client';
 import dayjs, { type Dayjs } from 'dayjs';
-import { useState, useEffect } from 'react';
-import NavigateArrow from '@/icons/navigate-arrow.svg';
-import { cva } from 'class-variance-authority';
+import { useState } from 'react';
 import Typography from '@/components/Typography';
-import { CardImage, CardList, CardItem, CardTitle, CardDescription } from '@/components/Card';
 import { useQuery } from '@tanstack/react-query';
 import axiosInstance from '@/utils/axiosInstance';
+import RecipePresence from './_components/RecipePresence';
+import RecipeList from './_components/RecipeList';
+import WeekDays from './_components/WeekDays';
+import WeekDates from './_components/WeekDates';
+import WeekNavigation from './_components/WeekNavigation';
 
-const SUNDAY = 'sunday';
-const SATURDAY = 'saturday';
-const DEFAULT = 'default';
 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 const THIRTY_MINUTES_IN_MS = 30 * 60 * 1000;
 
@@ -20,71 +19,6 @@ const getWeekDates = (baseDate: Dayjs, offsetWeeks: number = 0) => {
 
   return Array.from({ length: 7 }, (_, index) => startOfWeek.add(index, 'day'));
 };
-
-const dayClass = cva('w-7 text-[16px] font-medium', {
-  variants: {
-    dayType: {
-      sunday: 'text-[#F72A25]',
-      saturday: 'text-[#2686FB]',
-      default: 'text-[#666]'
-    }
-  },
-  defaultVariants: {
-    dayType: 'default'
-  }
-});
-
-const dateClass = cva('relative w-7 h-7 -z-0', {
-  variants: {
-    dayType: {
-      sunday: 'text-[#F72A25]',
-      saturday: 'text-[#2686FB]',
-      default: ''
-    },
-    isSelected: {
-      true: 'text-white font-semibold',
-      false: ''
-    },
-    isToday: {
-      true: 'text-white font-semibold',
-      false: ''
-    }
-  }
-});
-
-const backgroundClass = cva('absolute top-0 left-0 w-7 h-7 rounded-full -z-[1]', {
-  variants: {
-    isSelected: {
-      true: 'bg-[#222]',
-      false: ''
-    },
-    isToday: {
-      true: '',
-      false: ''
-    }
-  },
-  compoundVariants: [
-    {
-      isSelected: true,
-      isToday: true,
-      className: 'bg-[#222]'
-    },
-    {
-      isSelected: false,
-      isToday: true,
-      className: 'bg-[#ccc]'
-    },
-    {
-      isSelected: true,
-      isToday: false,
-      className: 'bg-[#222]'
-    }
-  ],
-  defaultVariants: {
-    isSelected: false,
-    isToday: false
-  }
-});
 
 const MyRecipePage = () => {
   const today = dayjs();
@@ -158,85 +92,21 @@ const MyRecipePage = () => {
         내가 작성한 레시피
       </Typography>
       <div className="p-[26px_26px_20px] rounded-[16px] shadow-[0_20px_30px_0_rgba(220,224,249,0.5)] border border-solid border-[#dbddeb] bg-white">
-        <div className="flex justify-between mb-7">
-          <div className="flex">
-            <div className="font-extrabold text-2xl w-[122px]">
-              {selectedDate.format('YYYY.MM.')}
-            </div>
-            <div className="flex gap-2">
-              <button onClick={handlePreviousWeek}>
-                <NavigateArrow />
-              </button>
-              <button onClick={handleNextWeek}>
-                <NavigateArrow className="rotate-180" />
-              </button>
-            </div>
-          </div>
-          <button onClick={handleToday} className="text-[15px] font-medium text-[#999]">
-            오늘
-          </button>
-        </div>
-        <div className="flex gap-6 text-center justify-between mb-5">
-          {daysOfWeek.map((day, index) => (
-            <div
-              key={day}
-              className={dayClass({
-                dayType: index === 0 ? SUNDAY : index === 6 ? SATURDAY : DEFAULT
-              })}
-            >
-              {day}
-            </div>
-          ))}
-        </div>
-
-        <div className="flex gap-6 text-center justify-between">
-          {weekDatesArray.map((date, index) => (
-            <div key={date.date()}>
-              <button
-                onClick={() => handleDateClick(date)}
-                className={dateClass({
-                  isSelected: date.isSame(selectedDate, 'day'),
-                  isToday: date.isSame(dayjs(), 'day'),
-                  dayType: index === 0 ? SUNDAY : index === 6 ? SATURDAY : DEFAULT
-                })}
-              >
-                <span
-                  className={backgroundClass({
-                    isSelected: date.isSame(selectedDate, 'day'),
-                    isToday: date.isSame(dayjs(), 'day')
-                  })}
-                />
-                {date.date()}
-              </button>
-            </div>
-          ))}
-        </div>
-        <div className="flex gap-6 text-center justify-between h-5">
-          {weeklyRecipePresence.map((presence: any, index: number) => (
-            <div key={index} className="w-5 h-5 mt-[2px] mx-auto flex justify-center items-center">
-              {!!presence && <span className="w-1 h-1 rounded-full bg-red-500" />}
-            </div>
-          ))}
-        </div>
+        <WeekNavigation
+          selectedDate={selectedDate}
+          handlePreviousWeek={handlePreviousWeek}
+          handleNextWeek={handleNextWeek}
+          handleToday={handleToday}
+        />
+        <WeekDays daysOfWeek={daysOfWeek} />
+        <WeekDates
+          weekDatesArray={weekDatesArray}
+          selectedDate={selectedDate}
+          handleDateClick={handleDateClick}
+        />
+        <RecipePresence weeklyRecipePresence={weeklyRecipePresence} />
       </div>
-      {!isRecipesPending &&
-        (recipes.length > 0 ? (
-          <CardList className="mt-[60px]">
-            {recipes.map((recipe: any, index: number) => (
-              <CardItem href={`/detail/${recipe.id}`} key={index}>
-                <CardImage src={recipe.thumbnail} />
-                <CardTitle>{recipe.title}</CardTitle>
-                <CardDescription>{recipe.subtitle}</CardDescription>
-              </CardItem>
-            ))}
-          </CardList>
-        ) : (
-          <div className="mt-[140px]">
-            <Typography as="p" size="md" className="text-center text-[#999]">
-              글이 없어요
-            </Typography>
-          </div>
-        ))}
+      <RecipeList recipes={recipes} isRecipesPending={isRecipesPending} />
     </>
   );
 };

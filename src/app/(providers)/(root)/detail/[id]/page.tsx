@@ -7,14 +7,13 @@ import { getRecipeById } from '@/services/recipesId';
 import Loader from '../_components/Loader';
 import ErrorPage from '../_components/ErrorPage';
 import RecipeThumbnailSection from '../_components/RecipeThumbnailSection';
+import useLoader from '@/hooks/useLoader';
 
 type ParamsType = {
   id: string;
 };
 
-type DetailPageProps = {};
-
-const DetailPage = (props: DetailPageProps) => {
+const DetailPage = () => {
   const params = useParams<ParamsType>();
   const id = params.id;
 
@@ -28,14 +27,16 @@ const DetailPage = (props: DetailPageProps) => {
     enabled: !!id
   });
 
-  if (isPending) return <Loader />;
+  const showLoader = useLoader(isPending);
+
+  if (showLoader) return <Loader />;
   if (error || !recipe) {
-    return <ErrorPage message={'해당 게시글이 없습니다.'} />;
+    return <ErrorPage message="해당 게시글이 없어요" />;
   }
 
   return (
     <>
-      <RecipeThumbnailSection thumbnail={recipe.thumbnail} title={recipe.title}/>
+      <RecipeThumbnailSection thumbnail={recipe.thumbnail} title={recipe.title} />
       {recipe && <RecipeSection recipe={recipe} />}
     </>
   );
