@@ -12,7 +12,7 @@ const RecipesSwiper = ({ recipes }) => {
     >
       {recipes.map((recipe, index) => (
         <SwiperSlide key={index}>
-          <CardItem href="/" as="div">
+          <CardItem href={`/detail/${recipe.id}`} as="a">
             <CardImage src={recipe.thumbnail} />
             <CardTitle>{recipe.title}</CardTitle>
             <CardDescription>{recipe.description}</CardDescription>

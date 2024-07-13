@@ -9,7 +9,8 @@ export const fetchRandomRecipes = async () => {
       description,
       time,
       thumbnail,
-      level
+      level,
+      id
     `);
 
   if (error) {
@@ -29,7 +30,8 @@ export const fetchAllRecipes = async () => {
       description,
       time,
       thumbnail,
-      level
+      level,
+      id
     `);
 
   if (error) {
@@ -50,7 +52,8 @@ export const fetchLatestRecipes = async () => {
       description,
       time,
       thumbnail,
-      level
+      level,
+      id
     `
     )
     .order('created_at', { ascending: false })
