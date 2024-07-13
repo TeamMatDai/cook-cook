@@ -1,12 +1,12 @@
 'use client';
 import { useParams } from 'next/navigation';
-import IconBackButton from '@/icons/arrow-left.svg';
-import IconSearch from '@/icons/search-white.svg';
 import { Recipe } from '@/types/recipe';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import Link from 'next/link';
 import RecipeSection from '../_components/RecipeSection';
 import { getRecipeById } from '@/services/recipesId';
+import Loader from '../_components/Loader';
+import ErrorPage from '../_components/ErrorPage';
+import RecipeThumbnailSection from '../_components/RecipeThumbnailSection';
 
 type ParamsType = {
   id: string;
@@ -28,26 +28,14 @@ const DetailPage = (props: DetailPageProps) => {
     enabled: !!id
   });
 
-  if (isPending) return <div>로딩중</div>;
-  if (error) return <div>로딩중 에러 발생</div>;
+  if (isPending) return <Loader />;
+  if (error || !recipe) {
+    return <ErrorPage message={'해당 게시글이 없습니다.'} />;
+  }
 
   return (
     <>
-      <article className="h-[500px] w-full">
-        <header className="px-[24px] absolute left-0 top-0 z-10 w-full h-[80px] flex flex-row justify-between items-center">
-          <Link href="/">
-            <IconBackButton />
-          </Link>
-          {/*TODO: 검색페이지 링크 추가하기*/}
-          <Link href="/">
-            <IconSearch />
-          </Link>
-        </header>
-        <div className="relative w-full h-full">
-          <img src={recipe?.thumbnail} alt={recipe?.title} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,_rgba(255,_255,_255,_0)_50%,_#fff)]" />
-        </div>
-      </article>
+      <RecipeThumbnailSection thumbnail={recipe.thumbnail} title={recipe.title}/>
       {recipe && <RecipeSection recipe={recipe} />}
     </>
   );
