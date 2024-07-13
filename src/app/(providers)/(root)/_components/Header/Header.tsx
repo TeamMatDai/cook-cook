@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import LogoIcon from '@/icons/header-logo.svg';
+import LogoIcon from '@/icons/logo.svg';
 import SearchIcon from '@/icons/header-search.svg';
 
 const Header = () => {
@@ -17,18 +17,18 @@ const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 w-full max-w-[500px] h-[109px] flex flex-col justify-start gap-2 pt-[15px] px-[16px] pb-0 border-b border-[#f1f1f1] bg-white z-10">
+    <header className="sticky top-0 w-full flex flex-col justify-start gap-2 pt-[15px] px-[16px] pb-0 border-b border-[#f1f1f1] bg-white z-10">
       <div className="h-[40px] flex justify-between items-center">
         <h1>
           <Link href="/">
-            <LogoIcon className="w-[118px] h-[31.3px] cursor-pointer" />
+            <LogoIcon className="cursor-pointer" />
           </Link>
         </h1>
         <div className="relative w-full max-w-xs ml-4">
           <input
             type="text"
             placeholder="지금 뭐 먹지?"
-            className="w-full h-10 p-3 rounded-full bg-[#f9f9f9] focus:outline-none"
+            className="w-full h-10 px-[16px] rounded-full bg-[#f9f9f9] focus:outline-none"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
@@ -42,16 +42,16 @@ const Header = () => {
         </div>
       </div>
       <nav className="flex justify-around items-center mt-2">
-        <Link href="/best" className="text-black font-bold">
+        <Link href="/best" className="text-[15px] font-medium text-[#000]">
           베스트
         </Link>
-        <Link href="/new" className="text-black font-bold">
+        <Link href="/new" className="text-[15px] font-medium text-[#000]">
           신상품
         </Link>
-        <Link href="/recommend" className="text-black font-bold">
+        <Link href="/recommend" className="text-[15px] font-medium text-[#000]">
           추천
         </Link>
-        <Link href="/event" className="text-black font-bold">
+        <Link href="/event" className="text-[15px] font-medium text-[#000]">
           이벤트
         </Link>
       </nav>
