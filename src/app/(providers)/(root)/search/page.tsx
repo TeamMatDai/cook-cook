@@ -42,7 +42,7 @@ const SearchPage = () => {
       ) : (
         <CardList>
           {results.map((result) => (
-            <CardItem key={result.id} href={`/recipes/${result.id}`}>
+            <CardItem key={result.id} href={`/detail/${result.id}`}>
               <CardImage src={result.thumbnail} />
               <CardTitle>{result.title}</CardTitle>
               <CardDescription>{result.description}</CardDescription>
