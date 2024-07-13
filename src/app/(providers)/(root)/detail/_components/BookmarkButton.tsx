@@ -5,6 +5,7 @@ import { addBookmark, checkBookmark, removeBookmark } from '@/services/bookmark'
 import showSwal from '@/utils/swal';
 import Loader from '../_components/Loader';
 import ErrorPage from '../_components/ErrorPage';
+import useBookmark from '@/hooks/queries/useBookmark';
 interface BookmarkButtonProps {
   recipesId: string;
 }
@@ -12,61 +13,10 @@ interface BookmarkButtonProps {
 // TODO: 북마크기능 로직 리펙토링 필요
 const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
   const userId = '6619b5b3-4fcc-4b55-a9c9-2bd7688b8614'; // 임시 사용자 ID
-  const queryClient = useQueryClient();
-
-  const {
-    data: isBookmarked,
-    isLoading,
-    error
-  } = useQuery({
-    queryKey: ['bookmark', recipesId],
-    queryFn: () => checkBookmark(recipesId, userId),
-    enabled: !!recipesId && !!userId
-  });
-
-  const addBookmarkMutation = useMutation({
-    mutationFn: () => addBookmark(recipesId, userId),
-    onMutate: async () => {
-      await queryClient.cancelQueries(['bookmark', recipesId]);
-
-      const previousBookmark = queryClient.getQueryData<boolean>(['bookmark', recipesId]);
-
-      queryClient.setQueryData(['bookmark', recipesId], true);
-
-      return { previousBookmark };
-    },
-    onError: (err, newBookmark, context: any) => {
-      if (context?.previousBookmark) {
-        queryClient.setQueryData(['bookmark', recipesId], context.previousBookmark);
-      }
-      showSwal({ icon: 'warning', title: '북마크 추가 에러' });
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries(['bookmark', recipesId]);
-    }
-  });
-
-  const removeBookmarkMutation = useMutation({
-    mutationFn: () => removeBookmark(recipesId, userId),
-    onMutate: async () => {
-      await queryClient.cancelQueries(['bookmark', recipesId]);
-
-      const previousBookmark = queryClient.getQueryData<boolean>(['bookmark', recipesId]);
-
-      queryClient.setQueryData(['bookmark', recipesId], false);
-
-      return { previousBookmark };
-    },
-    onError: (err, newBookmark, context: any) => {
-      if (context?.previousBookmark) return;
-      queryClient.setQueryData(['bookmark', recipesId], context.previousBookmark);
-      showSwal({ icon: 'warning', title: '북마크 해제 에러' });
-
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries(['bookmark', recipesId]);
-    }
-  });
+  const { isBookmarked, isLoading, error, addBookmark, removeBookmark } = useBookmark(
+    recipesId,
+    userId
+  );
 
   const handleBookmark = async () => {
     if (!userId) {
@@ -75,14 +25,14 @@ const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
     }
 
     if (isBookmarked) {
-      removeBookmarkMutation.mutate();
+      removeBookmark();
       return;
     }
-    addBookmarkMutation.mutate();
+    addBookmark();
   };
 
-  if (isLoading) return <Loader/>;
-  if (error) return <ErrorPage message={'북마크 에러가 발생하였습니다.'}/>;
+  if (isLoading) return <Loader />;
+  if (error) return <ErrorPage message={'북마크 에러가 발생하였습니다.'} />;
 
   return (
     <button
