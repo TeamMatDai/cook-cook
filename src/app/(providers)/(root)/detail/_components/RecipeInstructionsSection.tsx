@@ -18,7 +18,7 @@ const RecipeInstructionsSection = ({ recipe }: RecipeInstructionsSectionProps) =
       />
       <div
         dangerouslySetInnerHTML={{ __html: recipe.recipe }}
-        className="text-base text-gray-600 leading-1.5 mb-4"
+        className="text-base text-gray-600 leading-1.5 mb-4 flex flex-col gap-[16px]"
       />
     </article>
   );
