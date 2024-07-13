@@ -27,7 +27,6 @@ export const fetchAllRecipes = async () => {
   const { data, error } = await supabase.from('recipes').select(`
       title,
       subtitle,
-      description,
       time,
       thumbnail,
       level,

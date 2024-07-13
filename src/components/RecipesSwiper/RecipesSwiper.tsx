@@ -1,23 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { CardDescription, CardImage, CardItem, CardList, CardTitle } from '@/components/Card';
 import 'swiper/css';
 
-const RecipesSwiper = ({ recipes }) => {
+const RecipesSwiper = ({ recipes, render }) => {
   return (
-    <Swiper
-      spaceBetween={10}
-      slidesPerView={1.94}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
+    <Swiper spaceBetween={10} slidesPerView={1.94} className="!pl-[22px]">
       {recipes.map((recipe, index) => (
-        <SwiperSlide key={index}>
-          <CardItem href={`/detail/${recipe.id}`} as="a">
-            <CardImage src={recipe.thumbnail} />
-            <CardTitle>{recipe.title}</CardTitle>
-            <CardDescription>{recipe.description}</CardDescription>
-          </CardItem>
-        </SwiperSlide>
+        <SwiperSlide key={index}>{render(recipe)}</SwiperSlide>
       ))}
     </Swiper>
   );

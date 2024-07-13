@@ -29,17 +29,30 @@ export const CardImage = ({ src }: { src: string }) => {
   );
 };
 
-export const CardTitle = ({ children }: PropsWithChildren) => {
+export const CardTitle = ({ children, className }: PropsWithChildren<{ className?: string }>) => {
   return (
-    <Typography as="strong" size="md" weight="bold" className="block text-[#222] mt-[16px]">
+    <Typography
+      as="strong"
+      size="md"
+      weight="bold"
+      className={clsx('block text-[#222] mt-[16px]', className)}
+    >
       {children}
     </Typography>
   );
 };
 
-export const CardDescription = ({ children }: PropsWithChildren) => {
+export const CardDescription = ({
+  children,
+  className
+}: PropsWithChildren<{ className?: string }>) => {
   return (
-    <Typography as="p" size="sm" weight="light" className="text-[#666] truncate mt-[6px]">
+    <Typography
+      as="p"
+      size="sm"
+      weight="light"
+      className={clsx('text-[#666] truncate mt-[6px]', className)}
+    >
       {children}
     </Typography>
   );
