@@ -1,7 +1,9 @@
 import { cva } from 'class-variance-authority';
 import { DEFAULT, SATURDAY, SUNDAY } from '../_constants';
 
-const WeekDays = ({ daysOfWeek }) => (
+const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+
+const WeekDays = () => (
   <div className="flex gap-6 text-center justify-between mb-5">
     {daysOfWeek.map((day, index) => (
       <div
