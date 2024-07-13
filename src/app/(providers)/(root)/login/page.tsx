@@ -1,7 +1,7 @@
 'use client';
-import AuthLogin from '@/app/(providers)/(root)/login/_components/AuthLogin';
-import Background from '../../../../../public/loginBackground.png';
-import CookcookLogo from '@/icons/cookcookLogo.svg';
+import AuthLogin from './_components/AuthLogin';
+import Background from '../../../../../public/images/login/loginBackground.png';
+import LogoIcon from '@/icons/cookcookLogo.svg';
 import Image from 'next/image';
 
 const SignInPage = () => {
@@ -18,7 +18,7 @@ const SignInPage = () => {
       </div>
       <div className="absolute top-0 left-0 w-full h-dvh flex flex-col justify-center items-center">
         <div className="flex-grow flex justify-center items-center">
-          <CookcookLogo />
+          <LogoIcon />
         </div>
         <AuthLogin />
       </div>

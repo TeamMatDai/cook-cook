@@ -27,7 +27,14 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // TODO: 수정중
+  if (request.nextUrl.pathname.startsWith('/mypage')) {
+    const token = request.cookies.get('sb-nfbfehavnhjtitiuesjo-auth-token')?.value;
+    if (!token) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+    return NextResponse.next();
+  }
+
   const {
     data: { user }
   } = await supabase.auth.getUser();
