@@ -1,5 +1,5 @@
 import { LAYOUT } from '@/constants/tailwind';
-import BottomNav from '@/app/(providers)/(root)/_components/BottomNav';
+import BottomNav from '../_components/BottomNav';
 
 export default function DetailLayout({ children }: { children: React.ReactNode }) {
   return (

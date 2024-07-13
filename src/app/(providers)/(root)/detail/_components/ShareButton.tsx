@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconShare } from '@/icons/IconShare';
+import IconShare from '@/icons/share.svg';
 
 const handleShare = () => {
   const url = window.location.href;

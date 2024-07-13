@@ -1,7 +1,7 @@
 'use client';
-import { IconBookmark } from '@/icons/IconBookmark';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { addBookmark, checkBookmark, removeBookmark } from '@/lib/fetchData';
+import IconBookmark from '@/icons/bookmark.svg';
+import { addBookmark, checkBookmark, removeBookmark } from '@/services/bookmark';
 interface BookmarkButtonProps {
   recipesId: string;
 }

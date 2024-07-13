@@ -1,9 +1,9 @@
 import { Recipe } from '@/types/recipe';
-import RecipeInstructionsSection from '@/app/(providers)/(root)/detail/_components/RecipeInstructionsSection';
-import ShareButton from '@/app/(providers)/(root)/detail/_components/ShareButton';
-import BookmarkButton from '@/app/(providers)/(root)/detail/_components/BookmarkButton';
-import UserInfo from '@/app/(providers)/(root)/detail/_components/UserInfo';
-import IngredientsSection from '@/app/(providers)/(root)/detail/_components/IngredientsSection';
+import RecipeInstructionsSection from '../_components/RecipeInstructionsSection';
+import ShareButton from '../_components/ShareButton';
+import BookmarkButton from '../_components/BookmarkButton';
+import UserInfo from '../_components/UserInfo';
+import IngredientsSection from '../_components/IngredientsSection';
 
 const RecipeSection: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
   return (
