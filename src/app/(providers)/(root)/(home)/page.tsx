@@ -6,9 +6,7 @@ import { fetchAllRecipes, fetchLatestRecipes } from '@/utils/supabase/fetchRecip
 
 const Section = ({ title, children }) => (
   <section className="mb-8">
-    <header>
-      <h2 className="text-xl font-bold mb-4">{title}</h2>
-    </header>
+    <h2 className="text-xl font-bold mb-4">{title}</h2>
     {children}
   </section>
 );
