@@ -9,6 +9,12 @@ type RecipeSectionProps = {
   recipe: Recipe;
 };
 
+const LEVEL_KOR: Record<Recipe['level'], string> = {
+  easy: '쉬움',
+  medium: '중급',
+  hard: '어려움'
+};
+
 const RecipeSection = ({ recipe }: RecipeSectionProps) => {
   return (
     <div className="relative px-6">
@@ -17,7 +23,7 @@ const RecipeSection = ({ recipe }: RecipeSectionProps) => {
           <h3 className="text-[20px] text-gray-600">{recipe.subtitle}</h3>
           <h1 className="text-[52px] text-black font-extrabold">{recipe.title}</h1>
           <div className="text-lg text-gray-600">
-            {recipe.time}분 &middot; {recipe.level}
+            {recipe.time}분 &middot; {LEVEL_KOR[recipe.level]}
           </div>
         </div>
         <p className="text-xl text-gray-600 leading-normal break-keep">{recipe.description}</p>
