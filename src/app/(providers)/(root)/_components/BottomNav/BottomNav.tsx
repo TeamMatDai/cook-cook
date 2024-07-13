@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cva } from 'class-variance-authority';
 import { LAYOUT } from '@/constants/tailwind';
-import HomeIcon from '@/icons/bottom-nav-home.svg';
-import SearchIcon from '@/icons/bottom-nav-search.svg';
-import PencilIcon from '@/icons/bottom-nav-pencil.svg';
-import CalendarIcon from '@/icons/bottom-nav-calendar.svg';
-import UserIcon from '@/icons/bottom-nav-user.svg';
+import HomeIcon from '@/icons/home.svg';
+import SearchIcon from '@/icons/search.svg';
+import PencilIcon from '@/icons/pencil.svg';
+import CalendarIcon from '@/icons/calendar.svg';
+import UserIcon from '@/icons/user.svg';
 
 const NAV_ITEMS = [
   { href: '/', label: '홈', component: HomeIcon, exact: true },
@@ -69,7 +69,7 @@ const styles = {
     'transform',
     '-translate-x-1/2',
     'bg-white',
-    'z-100',
+    'z-50',
     LAYOUT.CONTAINER_MAX_WIDTH,
     'w-full',
     LAYOUT.BOTTOM_NAV_HEIGHT,
