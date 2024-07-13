@@ -1,6 +1,6 @@
 import React from 'react';
 import { LEVEL_MAP, LEVELS } from '../_utils/constants';
-import { Level } from '../_types/editorInput';
+import { Level } from '@/types/recipe';
 
 interface LevelSelectorProps {
   level: Level;

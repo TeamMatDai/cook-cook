@@ -1,12 +1,12 @@
 import { supabase } from '@/utils/supabase/supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
 import { INITIALSTATE } from '../page';
-import { State } from '../_types/editorInput';
 import showSwal from '@/utils/swal';
+import { Recipe } from '@/types/recipe';
 
 interface handleSubmitProps {
-  state: State;
-  setState: React.Dispatch<React.SetStateAction<State>>;
+  state: Recipe;
+  setState: React.Dispatch<React.SetStateAction<Recipe>>;
   fileInputRef: React.MutableRefObject<HTMLInputElement | null>;
 }
 
@@ -50,7 +50,7 @@ export const handleSubmit = async ({ state, setState, fileInputRef }: handleSubm
       recipe: state.value,
       time: state.time,
       level: state.level,
-      material: state.material.map((item) => JSON.stringify(item))
+      material: state.material
     }
   ]);
 

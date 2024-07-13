@@ -12,22 +12,22 @@ import PencilIcon from '@/icons/editor/pencil.svg';
 import PhotoIcon from '@/icons/editor/photo.svg';
 import Header from './_components/Header';
 import { handleSubmit } from './_utils/handleSubmit';
-import { State } from './_types/editorInput';
+import { Recipe } from '@/types/recipe';
 
-export const INITIALSTATE: State = {
+export const INITIALSTATE: Recipe = {
   title: '',
   subtitle: '',
   description: '',
   time: 0,
   material: [{ name: '', value: '' }],
-  thumbnail: null,
+  thumbnail: '',
   fileName: '썸네일 이미지를 올려주세요',
   level: 'easy',
   value: ''
 };
 
 const EditPage = () => {
-  const [state, setState] = useState<State>(INITIALSTATE);
+  const [state, setState] = useState<Recipe>(INITIALSTATE);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,9 +39,9 @@ const EditPage = () => {
     }));
   };
 
-  const handleChange = <K extends keyof State>(
+  const handleChange = <K extends keyof Recipe>(
     key: K,
-    value: State[K] | ((prev: State[K]) => State[K])
+    value: Recipe[K] | ((prev: Recipe[K]) => Recipe[K])
   ) => {
     setState((prevState) => ({
       ...prevState,

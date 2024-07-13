@@ -1,15 +1,17 @@
-import { Material } from '../_types/editorInput';
+import { Recipe } from '@/types/recipe';
 import CommonInput from './CommonInput';
 
 interface HandleMaterial {
   index: number;
-  field: string;
+  field: 'name' | 'value';
   value: string;
 }
 
 interface MaterialListProps {
-  material: Material[];
-  setMaterial: (material: Material[] | ((prevMaterial: Material[]) => Material[])) => void;
+  material: Recipe['material'];
+  setMaterial: (
+    material: Recipe['material'] | ((prevMaterial: Recipe['material']) => Recipe['material'])
+  ) => void;
 }
 
 const MaterialList = ({ material, setMaterial }: MaterialListProps) => {
