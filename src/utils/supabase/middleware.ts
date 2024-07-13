@@ -30,6 +30,7 @@ export async function updateSession(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/mypage')) {
     const token = request.cookies.get('sb-nfbfehavnhjtitiuesjo-auth-token')?.value;
     if (!token) {
+      alert('토큰있음');
       return NextResponse.redirect(new URL('/', request.url));
     }
     return NextResponse.next();
