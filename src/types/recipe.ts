@@ -4,7 +4,7 @@ export interface Recipe {
   subtitle: string;
   description: string;
   time: number;
-  level: "쉬움" | "중급" | "어려움";
+  level: "easy" | "medium" | "hard";
   author: {
     thumbnail: string;
     name: string;
