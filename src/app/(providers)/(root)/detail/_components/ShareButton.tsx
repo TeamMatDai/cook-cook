@@ -1,4 +1,5 @@
 import IconShare from '@/icons/share.svg';
+import showSwal from '@/utils/swal';
 
 const handleShare = () => {
   const url = window.location.href;
@@ -6,10 +7,10 @@ const handleShare = () => {
     navigator.clipboard
       .writeText(url)
       .then(() => {
-        alert('URL이 클립보드에 복사되었습니다.');
+        showSwal({ icon: 'warning', title: 'URL이 클립보드에 복사되었습니다.' });
       })
       .catch((error) => {
-        alert('error가 발생하였습니다.');
+        showSwal({ icon: 'warning', title: 'error가 발생하였습니다..' });
       });
   } else {
     console.log('Clipboard API not supported in this browser.');
