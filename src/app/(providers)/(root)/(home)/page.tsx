@@ -44,7 +44,7 @@ const Page = () => {
           render={(recipe: any) => (
             <CardItem href={`/detail/${recipe.id}`}>
               <CardImage src={recipe.thumbnail} />
-              <div className="shadow-[0_20px_30px_0_rgba(220,224,249,0.5)] border border-[#dbddeb] bg-white rounded-[12px] mt-[-48px] z-10 relative mb-[40px] py-[22px] mx-[10px] px-4">
+              <div className="shadow-[0_20px_30px_0_rgba(220,224,249,0.5)] border border-[#dbddeb] bg-white rounded-[12px] mt-[-48px] z-10 relative mb-[40px] py-[16px] mx-[10px] px-4">
                 <CardTitle className="!mt-0">{recipe.title}</CardTitle>
                 <CardDescription className="!mt-0">{recipe.subtitle}</CardDescription>
               </div>
