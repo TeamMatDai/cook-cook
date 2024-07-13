@@ -12,7 +12,9 @@ type ParamsType = {
   id: string;
 };
 
-const DetailPage: React.FC = () => {
+type DetailPageProps = {};
+
+const DetailPage = (props: DetailPageProps) => {
   const params = useParams<ParamsType>();
   const id = params.id;
 

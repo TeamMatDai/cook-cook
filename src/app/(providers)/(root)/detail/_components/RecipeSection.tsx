@@ -5,7 +5,11 @@ import BookmarkButton from '../_components/BookmarkButton';
 import UserInfo from '../_components/UserInfo';
 import IngredientsSection from '../_components/IngredientsSection';
 
-const RecipeSection: React.FC<{ recipe: Recipe }> = ({ recipe }) => {
+type RecipeSectionProps = {
+  recipe: Recipe;
+};
+
+const RecipeSection = ({ recipe }: RecipeSectionProps) => {
   return (
     <div className="relative px-6">
       <article className="-mt-16 mb-[72px] flex flex-col gap-[38px]">

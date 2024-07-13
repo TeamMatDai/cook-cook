@@ -7,7 +7,7 @@ interface BookmarkButtonProps {
 }
 
 // TODO: 북마크기능 로직 리펙토링 필요
-const BookmarkButton: React.FC<BookmarkButtonProps> = ({ recipesId }) => {
+const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
   const userId = '6619b5b3-4fcc-4b55-a9c9-2bd7688b8614'; // 임시 사용자 ID
   const queryClient = useQueryClient();
 

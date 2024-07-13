@@ -1,7 +1,11 @@
 import React from 'react';
 import { Recipe } from '@/types/recipe';
 
-const IngredientsSection: React.FC<{ materials: Recipe['material'] }> = ({ materials }) => (
+type IngredientsSectionProps = {
+  materials: Recipe['material'];
+};
+
+const IngredientsSection = ({ materials }: IngredientsSectionProps) => (
   <article className="mb-[90px]">
     <h2 className="text-xl text-black font-bold mb-[16px]">기본 재료</h2>
     <ul className="flex flex-col gap-[24px] text-[#666666]">
