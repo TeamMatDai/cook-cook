@@ -36,7 +36,7 @@ const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
       if (context?.previousBookmark) {
         queryClient.setQueryData(['bookmark', recipesId], context.previousBookmark);
       }
-      console.error('@@ADD BOOKMARK ERROR:', err);
+      alert('북마크 추가 에러');
     },
     onSettled: () => {
       queryClient.invalidateQueries(['bookmark', recipesId]);
@@ -55,10 +55,9 @@ const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
       return { previousBookmark };
     },
     onError: (err, newBookmark, context: any) => {
-      if (context?.previousBookmark) {
-        queryClient.setQueryData(['bookmark', recipesId], context.previousBookmark);
-      }
-      console.error('@@REMOVE BOOKMARK ERROR:', err);
+      if (context?.previousBookmark) return;
+      queryClient.setQueryData(['bookmark', recipesId], context.previousBookmark);
+      alert('북마크 해제 에러');
     },
     onSettled: () => {
       queryClient.invalidateQueries(['bookmark', recipesId]);

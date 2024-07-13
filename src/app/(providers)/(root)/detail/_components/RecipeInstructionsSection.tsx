@@ -1,5 +1,4 @@
 import { Recipe } from '@/types/recipe';
-import React from 'react';
 import Image from 'next/image';
 
 type RecipeInstructionsSectionProps = {

@@ -1,4 +1,3 @@
-import React from 'react';
 import IconShare from '@/icons/share.svg';
 
 const handleShare = () => {
@@ -17,9 +16,12 @@ const handleShare = () => {
   }
 };
 const ShareButton: React.FC = () => {
-
   return (
-    <button type='button' className='rounded-lg w-[66px] h-[66px] flex flex-col gap-2 justify-center items-center border border-lightgray' onClick={handleShare}>
+    <button
+      type="button"
+      className="rounded-lg w-[66px] h-[66px] flex flex-col gap-2 justify-center items-center border border-lightgray"
+      onClick={handleShare}
+    >
       <IconShare />
       공유
     </button>
