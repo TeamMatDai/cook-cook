@@ -3,14 +3,23 @@ import { v4 as uuidv4 } from 'uuid';
 import { INITIALSTATE } from '../page';
 import showSwal from '@/utils/swal';
 import { Recipe } from '@/types/recipe';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 interface handleSubmitProps {
   state: Recipe;
   setState: React.Dispatch<React.SetStateAction<Recipe>>;
   fileInputRef: React.MutableRefObject<HTMLInputElement | null>;
+  router: AppRouterInstance;
 }
 
-export const handleSubmit = async ({ state, setState, fileInputRef }: handleSubmitProps) => {
+export const handleSubmit = async ({
+  state,
+  setState,
+  fileInputRef,
+  router
+}: handleSubmitProps) => {
+  // const router = useRouter();
+
   if (
     state.title.trim() === '' ||
     state.subtitle.trim() === '' ||
@@ -58,9 +67,11 @@ export const handleSubmit = async ({ state, setState, fileInputRef }: handleSubm
     console.error('레시피 데이터 삽입 중 오류 발생:', error);
     return;
   }
-
+  showSwal({ icon: 'success', title: '레시피 작성이 완료되었습니다!' });
   setState(INITIALSTATE);
   if (fileInputRef.current) {
     fileInputRef.current.value = '';
   }
+
+  router.push('/');
 };

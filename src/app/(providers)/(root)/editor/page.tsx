@@ -13,6 +13,7 @@ import PhotoIcon from '@/icons/editor/photo.svg';
 import Header from './_components/Header';
 import { handleSubmit } from './_utils/handleSubmit';
 import { Recipe } from '@/types/recipe';
+import { useRouter } from 'next/navigation';
 
 export const INITIALSTATE: Recipe = {
   title: '',
@@ -29,6 +30,7 @@ export const INITIALSTATE: Recipe = {
 const EditPage = () => {
   const [state, setState] = useState<Recipe>(INITIALSTATE);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
@@ -51,7 +53,7 @@ const EditPage = () => {
 
   return (
     <>
-      <Header onSubmit={() => handleSubmit({ state, setState, fileInputRef })} />
+      <Header onSubmit={() => handleSubmit({ state, setState, fileInputRef, router })} />
       <section className="flex flex-col ml-5 mr-5 mb-10">
         <CommonInput
           placeholder="제목을 입력하세요"
