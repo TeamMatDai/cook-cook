@@ -20,7 +20,7 @@ const Header = () => {
     <header className="sticky top-0 w-full max-w-[500px] h-[109px] flex flex-col justify-start gap-2 pt-[15px] px-[16px] pb-0 border-b border-[#f1f1f1] bg-white z-10">
       <div className="h-[40px] flex justify-between items-center">
         <h1>
-          <Link href="/search">
+          <Link href="/">
             <LogoIcon className="w-[118px] h-[31.3px] cursor-pointer" />
           </Link>
         </h1>
