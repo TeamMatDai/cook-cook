@@ -2,9 +2,20 @@
 
 import React, { useEffect, useState } from 'react';
 import { RecipesSwiper } from '@/components/RecipesSwiper';
+import { useQuery } from '@tanstack/react-query';
 import { fetchAllRecipes, fetchLatestRecipes } from '@/utils/supabase/fetchRecipes';
 
-const Section = ({ title, children }) => (
+interface Recipe {
+  title: string;
+  description: string;
+}
+
+interface SectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+const Section = ({ title, children }: SectionProps) => (
   <section className="mb-8">
     <h2 className="text-xl font-bold mb-4">{title}</h2>
     {children}
@@ -12,26 +23,22 @@ const Section = ({ title, children }) => (
 );
 
 const Page = () => {
-  const [allRecipes, setAllRecipes] = useState([]);
-  const [latestRecipes, setLatestRecipes] = useState([]);
+  const { data: allRecipes = [] } = useQuery<Recipe[]>({
+    queryKey: ['allRecipes'],
+    queryFn: fetchAllRecipes
+  });
 
-  useEffect(() => {
-    const getData = async () => {
-      const allData = await fetchAllRecipes();
-      const latestData = await fetchLatestRecipes();
+  const { data: latestRecipes = [] } = useQuery<Recipe[]>({
+    queryKey: ['latestRecipes'],
+    queryFn: fetchLatestRecipes
+  });
 
-      const shuffledRecipes = allData.sort(() => 0.5 - Math.random());
-      setAllRecipes(shuffledRecipes.slice(0, 5));
-      setLatestRecipes(latestData);
-    };
-
-    getData();
-  }, []);
+  const shuffledRecipes = allRecipes.toSorted(() => 0.5 - Math.random());
 
   return (
     <>
       <Section title="예린님, 오늘 이 요리 어때요?">
-        <RecipesSwiper recipes={allRecipes} />
+        <RecipesSwiper recipes={shuffledRecipes} />
       </Section>
       <Section title="새로 올라온 레시피 ✨">
         <RecipesSwiper recipes={latestRecipes} />

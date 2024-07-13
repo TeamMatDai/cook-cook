@@ -1,10 +1,20 @@
 import { createClient } from './supabaseClient';
 
-export const fetchSearchResults = async (query) => {
+export interface Recipe {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  time: number;
+  thumbnail: string;
+  level: string;
+}
+
+export const fetchSearchResults = async (query: string): Promise<Recipe[]> => {
   const supabase = createClient();
   let { data, error } = await supabase
     .from('recipes')
-    .select('title, subtitle, description, time, thumbnail, level')
+    .select('id, title, subtitle, description, time, thumbnail, level')
     .ilike('title', `%${query}%`);
 
   if (error) {
@@ -12,5 +22,5 @@ export const fetchSearchResults = async (query) => {
     return [];
   }
 
-  return data;
+  return data ?? [];
 };
