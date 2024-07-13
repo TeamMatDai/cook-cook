@@ -1,13 +1,12 @@
 'use client';
 import { useParams } from 'next/navigation';
-import { getRecipeById } from '@/lib/fetchData';
 import IconBackButton from '@/icons/arrow-left.svg';
-import { IconSearch } from '@/icons/IconSearch';
+import IconSearch from '@/icons/search-white.svg';
 import { Recipe } from '@/types/recipe';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import Link from 'next/link';
-import Image from 'next/image';
 import RecipeSection from '../_components/RecipeSection';
+import { getRecipeById } from '@/services/recipesId';
 
 type ParamsType = {
   id: string;
