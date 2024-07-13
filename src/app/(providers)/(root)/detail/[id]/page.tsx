@@ -7,7 +7,7 @@ import { getRecipeById } from '@/services/recipesId';
 import Loader from '../_components/Loader';
 import ErrorPage from '../_components/ErrorPage';
 import RecipeThumbnailSection from '../_components/RecipeThumbnailSection';
-import { useState, useEffect } from 'react';
+import useLoader from '@/hooks/useLoader';
 
 type ParamsType = {
   id: string;
@@ -16,7 +16,6 @@ type ParamsType = {
 const DetailPage = () => {
   const params = useParams<ParamsType>();
   const id = params.id;
-  const [showLoader, setShowLoader] = useState(true);
 
   const {
     data: recipe,
@@ -28,12 +27,7 @@ const DetailPage = () => {
     enabled: !!id
   });
 
-  useEffect(() => {
-    if (!isPending) {
-      const timer = setTimeout(() => setShowLoader(false), 200);
-      return () => clearTimeout(timer);
-    }
-  }, [isPending]);
+  const showLoader = useLoader(isPending);
 
   if (showLoader) return <Loader />;
   if (error || !recipe) {
