@@ -11,6 +11,8 @@
     "gen": "supabase gen types typescript --project-id nfbfehavnhjtitiuesjo --schema public > src/types/supabase.ts"
   },
   "dependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/auth-helpers-react": "^0.5.0",
     "@supabase/ssr": "^0.4.0",
     "@supabase/supabase-js": "^2.44.3",
     "@svgr/webpack": "^8.1.0",
@@ -19,7 +21,6 @@
     "axios": "^1.7.2",
     "validator": "^13.12.0",
     "@types/dompurify": "^3.0.5",
-    "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "dayjs": "^1.11.11",
     "dompurify": "^3.1.6",

@@ -27,38 +27,34 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // IMPORTANT: Avoid writing any logic between createServerClient and
-  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
-  // issues with users being randomly logged out.
+  if (request.nextUrl.pathname.startsWith('/mypage')) {
+    const token = request.cookies.get('sb-nfbfehavnhjtitiuesjo-auth-token')?.value;
+    if (!token) {
+      alert('토큰있음');
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+    return NextResponse.next();
+  }
 
   const {
     data: { user }
   } = await supabase.auth.getUser();
 
+  if (user && request.nextUrl.pathname.startsWith('/login')) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  // 로그인하지 않은 사용자가 login 페이지가 아닌 다른 페이지에 접근하려고 할 때. auth로 리다이렉트
   if (!user && !request.nextUrl.pathname.startsWith('/login')) {
-    // no user, potentially respond by redirecting the user to the login page
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
 
-  //  현재 로그인 상태이면서 경로가 /login 인 경우 홈화면으로 리다이렉트.
+  // 현재 로그인 상태이면서 경로가 /login 인 경우 홈화면으로 리다이렉트.
   if (user && request.nextUrl.pathname.startsWith('/login')) {
     return NextResponse.redirect(request.nextUrl.origin);
   }
-
-  // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
-  // creating a new response object with NextResponse.next() make sure to:
-  // 1. Pass the request in it, like so:
-  //    const myNewResponse = NextResponse.next({ request })
-  // 2. Copy over the cookies, like so:
-  //    myNewResponse.cookies.setAll(supabaseResponse.cookies.getAll())
-  // 3. Change the myNewResponse object to fit your needs, but avoid changing
-  //    the cookies!
-  // 4. Finally:
-  //    return myNewResponse
-  // If this is not done, you may be causing the browser and server to go out
-  // of sync and terminate the user's session prematurely!
 
   return supabaseResponse;
 }
