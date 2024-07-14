@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { AuthStoreContext } from '@/providers/AuthStoreProvider';
 import { useContext } from 'react';
 import { supabase } from '@/utils/supabase/supabaseClient';
+import showSwal from '@/utils/swal';
 
 const MyPage = () => {
   const router = useRouter();
@@ -27,10 +28,8 @@ const MyPage = () => {
     logout();
     const { error } = await supabase.auth.signOut();
 
-    error ? alert('로그아웃 실패') : router.push('/');
+    error ? showSwal({ icon: 'error', title: '로그아웃 실패' }) : router.push('/');
   };
-
-  if (!email) return null;
 
   return (
     <>

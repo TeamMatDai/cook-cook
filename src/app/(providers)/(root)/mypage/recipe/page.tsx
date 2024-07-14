@@ -8,6 +8,10 @@ import WeekDates from './_components/WeekDates';
 import WeekNavigation from './_components/WeekNavigation';
 import { useRecipes, useWeeklyRecipePresence } from '@/hooks/queries/useRecipes';
 import useWeekNavigation from './_hooks/useWeekNavigation';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/providers/AuthStoreProvider';
+import { useEffect } from 'react';
+import showSwal from '@/utils/swal';
 
 const getWeekDates = (baseDate: Dayjs, offsetWeeks: number = 0) => {
   const date = dayjs(baseDate).add(offsetWeeks, 'week');
@@ -17,6 +21,9 @@ const getWeekDates = (baseDate: Dayjs, offsetWeeks: number = 0) => {
 };
 
 const MyRecipePage = () => {
+  const router = useRouter();
+  const user = useAuthStore((state) => state.user);
+
   const today = dayjs();
   const {
     selectedDate,
@@ -34,6 +41,13 @@ const MyRecipePage = () => {
 
   const { data: weeklyRecipePresence = [] } = useWeeklyRecipePresence({ startDate, endDate });
   const { data: recipes = [], isPending: isRecipesPending } = useRecipes(createdAt);
+
+  useEffect(() => {
+    if (!user) {
+      showSwal({ icon: 'warning', title: '로그인이 필요한 페이지입니다.' });
+      router.push('/login');
+    }
+  }, []);
 
   return (
     <>

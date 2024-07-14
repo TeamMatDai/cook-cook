@@ -26,7 +26,7 @@ const UserInfo = ({ recipesId }) => {
   }, [recipesId]);
 
   return (
-    <div className="flex flex-col gap-[50px] justify-center items-center">
+    <div className="flex flex-col gap-[18px] justify-center items-center">
       <Image
         className="w-[50px] h-[50px] rounded-full overflow-hidden object-cover"
         src={user.thumbnail}
