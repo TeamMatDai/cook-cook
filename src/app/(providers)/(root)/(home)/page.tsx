@@ -5,6 +5,8 @@ import { RecipesSwiper } from '@/components/RecipesSwiper';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllRecipes, fetchLatestRecipes } from '@/utils/supabase/fetchRecipes';
 import { CardDescription, CardImage, CardItem, CardTitle } from '@/components/Card';
+import useLoader from '@/hooks/useLoader';
+import Loader from '../detail/_components/Loader';
 
 interface Recipe {
   title: string;
@@ -24,7 +26,7 @@ const Section = ({ title, children }: SectionProps) => (
 );
 
 const Page = () => {
-  const { data: allRecipes = [] } = useQuery<Recipe[]>({
+  const { data: allRecipes = [], isPending } = useQuery<Recipe[]>({
     queryKey: ['allRecipes'],
     queryFn: fetchAllRecipes
   });
@@ -35,6 +37,10 @@ const Page = () => {
   });
 
   const shuffledRecipes = allRecipes.toSorted(() => 0.5 - Math.random());
+
+  const showLoader = useLoader(isPending);
+
+  if (showLoader) return <Loader />;
 
   return (
     <>
