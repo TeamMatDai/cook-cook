@@ -35,14 +35,18 @@ const useBookmark = (recipesId: string, userId: string) => {
       showSwal({ icon: 'warning', title: '북마크 추가 에러가 발생했습니다.' });
     },
     onSettled: () => {
-      queryClient.invalidateQueries(['bookmark', recipesId]);
+      queryClient.invalidateQueries({
+        queryKey: ['bookmark', recipesId]
+      });
     }
   });
 
   const removeBookmarkMutation = useMutation({
     mutationFn: () => removeBookmark(recipesId, userId),
     onMutate: async () => {
-      await queryClient.cancelQueries(['bookmark', recipesId]);
+      await queryClient.cancelQueries({
+        queryKey: ['bookmark', recipesId]
+      });
 
       const previousBookmark = queryClient.getQueryData<boolean>(['bookmark', recipesId]);
 
@@ -56,7 +60,9 @@ const useBookmark = (recipesId: string, userId: string) => {
       showSwal({ icon: 'warning', title: '북마크 해제 에러가 발생했습니다.' });
     },
     onSettled: () => {
-      queryClient.invalidateQueries(['bookmark', recipesId]);
+      queryClient.invalidateQueries({
+        queryKey: ['bookmark', recipesId]
+      });
     }
   });
   return {

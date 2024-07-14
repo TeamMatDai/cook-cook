@@ -16,7 +16,7 @@ export const checkBookmark = async (recipesId: string, userId: string) => {
 };
 
 export const addBookmark = async (recipesId: string, userId: string) => {
-  const bookmark: Bookmark = { recipesId, userId };
+  const bookmark: Bookmark = { recipesId: parseInt(recipesId), userId };
   const { data, error } = await supabase.from('bookmark').insert([bookmark]);
 
   if (error) throw new Error(error.message);

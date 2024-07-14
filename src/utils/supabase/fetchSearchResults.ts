@@ -10,7 +10,7 @@ export interface Recipe {
   level: string;
 }
 
-export const fetchSearchResults = async (query: string): Promise<Recipe[]> => {
+export const fetchSearchResults = async (query: string) => {
   const supabase = createClient();
   let { data, error } = await supabase
     .from('recipes')

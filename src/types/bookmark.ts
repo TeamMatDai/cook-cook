@@ -1,5 +1,5 @@
 export type Bookmark = {
-  recipesId: string;
+  recipesId: number;
   userId: string;
   created_at?: string;
 };

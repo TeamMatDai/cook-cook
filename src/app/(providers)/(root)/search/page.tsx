@@ -16,7 +16,7 @@ const SearchPage = () => {
     data: results = [],
     isLoading,
     isError
-  } = useQuery<Recipe[]>({
+  } = useQuery({
     queryKey: ['searchResults', query],
     queryFn: () => fetchSearchResults(query),
     enabled: !!query
