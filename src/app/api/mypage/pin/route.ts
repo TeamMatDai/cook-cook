@@ -1,5 +1,5 @@
 import { ERROR_MESSAGES } from '@/constants/errorMessage';
-import { getPinnedRecipes, getRecipes } from '@/services/recipes';
+import { getPinnedRecipes } from '@/services/recipes';
 import { getUser } from '@/services/user';
 import { NextRequest, NextResponse } from 'next/server';
 
