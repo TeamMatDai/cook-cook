@@ -34,7 +34,7 @@ const RecipeSection = ({ recipe }: RecipeSectionProps) => {
         <ShareButton />
         <BookmarkButton recipesId={recipe.id} />
       </div>
-      <UserInfo />
+      <UserInfo recipesId={recipe.id} />
     </div>
   );
 };
