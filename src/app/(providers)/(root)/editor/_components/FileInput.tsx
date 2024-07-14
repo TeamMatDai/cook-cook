@@ -12,4 +12,6 @@ const FileInput = forwardRef<HTMLInputElement, FileInputProps>(({ fileName, onCh
   </label>
 ));
 
+FileInput.displayName = 'FileInput';
+
 export default FileInput;

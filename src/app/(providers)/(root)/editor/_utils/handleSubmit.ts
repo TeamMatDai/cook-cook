@@ -1,9 +1,9 @@
 import { supabase } from '@/utils/supabase/supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
-import { INITIALSTATE } from '../page';
 import showSwal from '@/utils/swal';
 import { Recipe } from '@/types/recipe';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+import { INITIAL_STATE } from './constants';
 
 interface handleSubmitProps {
   state: Recipe;
@@ -68,7 +68,7 @@ export const handleSubmit = async ({
     return;
   }
   showSwal({ icon: 'success', title: '레시피 작성이 완료되었습니다!' });
-  setState(INITIALSTATE);
+  setState(INITIAL_STATE);
   if (fileInputRef.current) {
     fileInputRef.current.value = '';
   }

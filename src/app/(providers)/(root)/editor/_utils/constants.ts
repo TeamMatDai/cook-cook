@@ -1,4 +1,4 @@
-import { Level } from '@/types/recipe';
+import type { Level, Recipe } from '@/types/recipe';
 
 export const FORMATS = [
   'size',
@@ -12,6 +12,18 @@ export const FORMATS = [
   'color',
   'background'
 ];
+
+export const INITIAL_STATE: Recipe = {
+  title: '',
+  subtitle: '',
+  description: '',
+  time: 0,
+  material: [{ name: '', value: '' }],
+  thumbnail: '',
+  fileName: '썸네일 이미지를 올려주세요',
+  level: 'easy',
+  value: ''
+};
 
 export const LEVEL_MAP: Record<Level, string> = {
   easy: '초급',

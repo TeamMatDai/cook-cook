@@ -16,21 +16,10 @@ import { Recipe } from '@/types/recipe';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/providers/AuthStoreProvider';
 import showSwal from '@/utils/swal';
-
-export const INITIALSTATE: Recipe = {
-  title: '',
-  subtitle: '',
-  description: '',
-  time: 0,
-  material: [{ name: '', value: '' }],
-  thumbnail: '',
-  fileName: '썸네일 이미지를 올려주세요',
-  level: 'easy',
-  value: ''
-};
+import { INITIAL_STATE } from './_utils/constants';
 
 const EditPage = () => {
-  const [state, setState] = useState<Recipe>(INITIALSTATE);
+  const [state, setState] = useState<Recipe>(INITIAL_STATE);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
   const user = useAuthStore((state) => state.user);
@@ -49,7 +38,7 @@ const EditPage = () => {
       showSwal({ icon: 'warning', title: '로그인이 필요한 페이지입니다.' });
       router.push('/login');
     }
-  }, []);
+  }, [router, user]);
 
   const handleChange = <K extends keyof Recipe>(
     key: K,

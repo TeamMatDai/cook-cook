@@ -16,9 +16,11 @@ interface ForwardedQuillComponent extends ReactQuillProps {
 const DynamicReactQuill = dynamic(
   async () => {
     const { default: ReactQuill } = await import('react-quill');
-    return ({ forwardedRef, ...props }: ForwardedQuillComponent) => (
+    const ForwardedComponent = ({ forwardedRef, ...props }: ForwardedQuillComponent) => (
       <ReactQuill ref={forwardedRef} {...props} />
     );
+    ForwardedComponent.displayName = 'ForwardedComponent';
+    return ForwardedComponent;
   },
   { ssr: false, loading: () => <p>Loading ...</p> }
 );

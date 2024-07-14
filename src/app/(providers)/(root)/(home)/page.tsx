@@ -9,16 +9,18 @@ import useShallowSelector from '@/hooks/useShallowSelector';
 import { useAuthStore } from '@/providers/AuthStoreProvider';
 import useLoader from '@/hooks/useLoader';
 import Loader from '../detail/_components/Loader';
-
-interface Recipe {
-  title: string;
-  description: string;
-}
+import { AuthStoreTypes } from '@/stores/authStore';
+import { UserMetadata } from '@supabase/supabase-js';
+import type { Recipe } from '@/types/recipe';
 
 interface SectionProps {
   title: string;
   children: React.ReactNode;
 }
+
+type UserType = {
+  fullName: UserMetadata['full_name'];
+};
 
 const Section = ({ title, children }: SectionProps) => (
   <section className="mb-8">
@@ -28,16 +30,16 @@ const Section = ({ title, children }: SectionProps) => (
 );
 
 const Page = () => {
-  const { fullName } = useShallowSelector(useAuthStore, ({ user }) => ({
+  const { fullName } = useShallowSelector<AuthStoreTypes, UserType>(useAuthStore, ({ user }) => ({
     fullName: user?.user_metadata?.full_name || ''
   }));
 
-  const { data: allRecipes = [], isPending } = useQuery<Recipe[]>({
+  const { data: allRecipes = [], isPending } = useQuery({
     queryKey: ['allRecipes'],
     queryFn: fetchAllRecipes
   });
 
-  const { data: latestRecipes = [] } = useQuery<Recipe[]>({
+  const { data: latestRecipes = [] } = useQuery({
     queryKey: ['latestRecipes'],
     queryFn: fetchLatestRecipes
   });
