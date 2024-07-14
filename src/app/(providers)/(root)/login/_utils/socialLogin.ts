@@ -17,13 +17,3 @@ export const kakaoLogin = async () => {
     }
   });
 };
-
-export const signInWithKakao = async () => {
-  const response = await fetch('/api/login/kakao', { method: 'POST' });
-  return response;
-};
-
-export const signInWithGoogle = async () => {
-  const response = await fetch('/api/login/google', { method: 'POST' });
-  return response;
-};
