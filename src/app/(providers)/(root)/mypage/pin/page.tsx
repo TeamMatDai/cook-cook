@@ -26,7 +26,7 @@ const MyPinPage = () => {
       {!isPending &&
         (pinnedRecipes.length > 0 ? (
           <CardList>
-            {pinnedRecipes.map((recipe: any) => (
+            {pinnedRecipes.map((recipe) => (
               <CardItem href={`/detail/${recipe.recipes.id}`} key={recipe.recipes.id}>
                 <CardImage src={recipe.recipes.thumbnail} />
                 <CardTitle>{recipe.recipes.title}</CardTitle>

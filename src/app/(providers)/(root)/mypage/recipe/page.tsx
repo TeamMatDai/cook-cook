@@ -9,7 +9,7 @@ import WeekNavigation from './_components/WeekNavigation';
 import { useRecipes, useWeeklyRecipePresence } from '@/hooks/queries/useRecipes';
 import useWeekNavigation from './_hooks/useWeekNavigation';
 
-const getWeekDates = (baseDate: Dayjs, offsetWeeks: number = 0) => {
+const getWeekDates = (baseDate: Dayjs, offsetWeeks: number = 0): Dayjs[] => {
   const date = dayjs(baseDate).add(offsetWeeks, 'week');
   const startOfWeek = date.startOf('week');
 

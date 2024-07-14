@@ -1,6 +1,19 @@
 import NavigateArrow from '@/icons/navigate-arrow.svg';
+import { Dayjs } from 'dayjs';
 
-const WeekNavigation = ({ selectedDate, handlePreviousWeek, handleNextWeek, handleToday }) => (
+type WeekNavigationProps = {
+  selectedDate: Dayjs;
+  handlePreviousWeek: () => void;
+  handleNextWeek: () => void;
+  handleToday: () => void;
+};
+
+const WeekNavigation = ({
+  selectedDate,
+  handlePreviousWeek,
+  handleNextWeek,
+  handleToday
+}: WeekNavigationProps) => (
   <div className="flex justify-between mb-7">
     <div className="flex">
       <div className="font-extrabold text-2xl w-[122px]">{selectedDate.format('YYYY.MM.')}</div>

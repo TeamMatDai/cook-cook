@@ -1,4 +1,4 @@
-import { User } from '@supabase/supabase-js';
+import type { User } from '@supabase/supabase-js';
 import { createStore } from 'zustand/vanilla';
 
 export type UserType = User | null;

@@ -1,8 +1,14 @@
 import { cva } from 'class-variance-authority';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { DEFAULT, SATURDAY, SUNDAY } from '../_constants';
 
-const WeekDates = ({ weekDatesArray, selectedDate, handleDateClick }) => (
+type WeekDatesProps = {
+  weekDatesArray: Dayjs[];
+  selectedDate: Dayjs;
+  handleDateClick: (date: Dayjs) => void;
+};
+
+const WeekDates = ({ weekDatesArray, selectedDate, handleDateClick }: WeekDatesProps) => (
   <div className="flex gap-6 text-center justify-between">
     {weekDatesArray.map((date, index) => (
       <div key={date.date()}>

@@ -1,17 +1,15 @@
 'use client';
 
-import { type ReactNode, createContext, useRef, useContext, useEffect } from 'react';
+import { createContext, useRef, useContext, useEffect } from 'react';
 import { useStore } from 'zustand';
 import { type AuthStoreTypes, createAuthStore } from '@/stores/authStore';
 import { createClient } from '@/utils/supabase/supabaseClient';
+import type { StrictPropsWithChildren } from '@/types/common';
 
 export type AuthStoreApi = ReturnType<typeof createAuthStore>;
 export const AuthStoreContext = createContext<AuthStoreApi | undefined>(undefined);
-export interface AuthStoreProviderProps {
-  children: ReactNode;
-}
 
-export const AuthStoreProvider = ({ children }: AuthStoreProviderProps) => {
+export const AuthStoreProvider = ({ children }: StrictPropsWithChildren) => {
   const storeRef = useRef<AuthStoreApi>();
   const supabase = createClient();
 
