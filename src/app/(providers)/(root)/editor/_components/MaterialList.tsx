@@ -1,15 +1,17 @@
-import { Material } from '../_types/editorInput';
+import { Recipe } from '@/types/recipe';
 import CommonInput from './CommonInput';
 
 interface HandleMaterial {
   index: number;
-  field: string;
+  field: 'name' | 'value';
   value: string;
 }
 
 interface MaterialListProps {
-  material: Material[];
-  setMaterial: (material: Material[] | ((prevMaterial: Material[]) => Material[])) => void;
+  material: Recipe['material'];
+  setMaterial: (
+    material: Recipe['material'] | ((prevMaterial: Recipe['material']) => Recipe['material'])
+  ) => void;
 }
 
 const MaterialList = ({ material, setMaterial }: MaterialListProps) => {
@@ -32,8 +34,8 @@ const MaterialList = ({ material, setMaterial }: MaterialListProps) => {
   };
 
   return (
-    <>
-      <strong className="w-[60px] h-[18px] font-semibold mt-7 mb-4">기본재료</strong>
+    <div className="pt-4">
+      <p className="w-[60px] h-[18px] font-weight:500 mt-7 mb-4">기본재료</p>
       {material.map((materials, index) => (
         <div key={index} className="flex items-center gap-3 mb-2">
           <CommonInput
@@ -66,7 +68,7 @@ const MaterialList = ({ material, setMaterial }: MaterialListProps) => {
           + 재료 추가하기
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

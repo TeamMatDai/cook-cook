@@ -12,7 +12,7 @@ const CommonInput = ({ placeholder, value, setValue, className }: CommonInputPro
       placeholder={placeholder}
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      className={`common-input-styles ${className}`}
+      className={`common-input-styles placeholder:text-[#999999] ${className}`}
     />
   );
 };

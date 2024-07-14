@@ -12,23 +12,25 @@ import PencilIcon from '@/icons/editor/pencil.svg';
 import PhotoIcon from '@/icons/editor/photo.svg';
 import Header from './_components/Header';
 import { handleSubmit } from './_utils/handleSubmit';
-import { State } from './_types/editorInput';
+import { Recipe } from '@/types/recipe';
+import { useRouter } from 'next/navigation';
 
-export const INITIALSTATE: State = {
+export const INITIALSTATE: Recipe = {
   title: '',
   subtitle: '',
   description: '',
   time: 0,
   material: [{ name: '', value: '' }],
-  thumbnail: null,
+  thumbnail: '',
   fileName: '썸네일 이미지를 올려주세요',
   level: 'easy',
   value: ''
 };
 
 const EditPage = () => {
-  const [state, setState] = useState<State>(INITIALSTATE);
+  const [state, setState] = useState<Recipe>(INITIALSTATE);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
@@ -39,9 +41,9 @@ const EditPage = () => {
     }));
   };
 
-  const handleChange = <K extends keyof State>(
+  const handleChange = <K extends keyof Recipe>(
     key: K,
-    value: State[K] | ((prev: State[K]) => State[K])
+    value: Recipe[K] | ((prev: Recipe[K]) => Recipe[K])
   ) => {
     setState((prevState) => ({
       ...prevState,
@@ -51,22 +53,22 @@ const EditPage = () => {
 
   return (
     <>
-      <Header onSubmit={() => handleSubmit({ state, setState, fileInputRef })} />
+      <Header onSubmit={() => handleSubmit({ state, setState, fileInputRef, router })} />
       <section className="flex flex-col ml-5 mr-5 mb-10">
         <CommonInput
           placeholder="제목을 입력하세요"
           value={state.title}
           setValue={(value) => handleChange('title', value)}
-          className="h-20 px-3 text-[20px] font-semibold border-b border-gray-300"
+          className="h-20 px-3 text-[20px] font-semibold border-b #f0f0f0"
         />
-        <div className="flex flex-col gap-8 my-8">
+        <div className="flex flex-col my-8">
           <div className="flex items-center gap-2">
             <CommentIcon />
             <CommonInput
               placeholder="한 줄 설명을 입력하세요"
               value={state.subtitle}
               setValue={(value) => handleChange('subtitle', value)}
-              className="w-full px-2 py-1"
+              className="h-16 w-full px-2 py-1"
             />
           </div>
           <div className="flex items-center gap-2">
@@ -75,10 +77,10 @@ const EditPage = () => {
               placeholder="내용을 입력하세요"
               value={state.description}
               setValue={(value) => handleChange('description', value)}
-              className="w-full px-2 py-1"
+              className="h-16 w-full px-2 py-1"
             />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 h-16">
             <PhotoIcon />
             <FileInput fileName={state.fileName} onChange={handleFileChange} ref={fileInputRef} />
           </div>

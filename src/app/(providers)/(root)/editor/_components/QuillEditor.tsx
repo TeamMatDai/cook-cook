@@ -45,7 +45,7 @@ const QuillEditor = ({ value, setValue }: QuillEditorProps) => {
 
   return (
     <>
-      <p className="w-[60px] h-[18px] font-semibold mt-7 mb-4">레시피</p>
+      <p className="w-[60px] h-[18px] mt-7 mb-4">레시피</p>
       <DynamicReactQuill
         forwardedRef={quillRef}
         theme="snow"
@@ -54,7 +54,7 @@ const QuillEditor = ({ value, setValue }: QuillEditorProps) => {
         placeholder="나만의 레시피를 작성해주세요!"
         value={value}
         onChange={setValue}
-        className="h-96"
+        className="h-96 border-[#f0f0f0]"
       />
     </>
   );

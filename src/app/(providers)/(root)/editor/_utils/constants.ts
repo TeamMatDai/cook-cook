@@ -1,4 +1,4 @@
-import { Level } from '../_types/editorInput';
+import { Level } from '@/types/recipe';
 
 export const FORMATS = [
   'size',

@@ -7,7 +7,7 @@ interface TimeInputProps {
 
 const TimeInput = ({ time, setTime }: TimeInputProps) => (
   <>
-    <p className="w-15 h-4 font-semibold my-5">소요시간</p>
+    <p className="w-15 h-4 font-weight:500 mb-5">소요시간</p>
     <div className="flex items-center gap-2">
       <TimeIcon />
       <input
