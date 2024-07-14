@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { fetchSearchResults, Recipe } from '@/utils/supabase/fetchSearchResults';
 import MainLayout from '@/app/(providers)/(root)/_components/MainLayout';
