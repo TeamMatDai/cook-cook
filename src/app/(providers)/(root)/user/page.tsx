@@ -1,54 +1,32 @@
 'use client';
-import { createClient } from '@/utils/supabase/supabaseClient';
+
+import { useAuthStore } from '@/providers/AuthStoreProvider';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useUserContext } from '@/providers/UserProvider';
 
-const UserPage = () => {
-  const { user } = useUserContext();
-  const supabase = createClient();
-  const router = useRouter();
-  console.log('UserPage >>>', user);
+export default function UserPage() {
+  const { user, isLogin, login, logout } = useAuthStore((state) => state);
 
-  const handleAuth = async () => {
-    if (user) {
-      const { error } = await supabase.auth.signOut();
-      router.push('/');
-      if (error) {
-        console.error(error);
-      }
-    }
-    if (!user) {
-      router.push('/login');
-    }
-  };
-
+  console.log('user', user);
+  console.log('isLogin', isLogin);
+  console.log('login', login);
+  console.log('logout', logout);
   return (
-    <div className="font-semibold h-full flex flex-col items-center justify-center">
-      {user && (
-        <div>
-          안녕하세요 {user?.user_metadata.full_name}님
+    <div>
+      {user ? (
+        <>
+          user: {user?.user_metadata.full_name}
           <Image
-            className="rounded-full"
             src={user?.user_metadata.avatar_url}
-            alt="profile"
+            alt="avatar"
             width={100}
             height={100}
-            priority={true}
             unoptimized
           />
-        </div>
+          <hr />
+        </>
+      ) : (
+        <>No user</>
       )}
-      <div>
-        <button
-          className="border border-neutral-400 rounded-lg px-4 py-1 hover:bg-neutral-100 hover:border-neutral-500 transition"
-          onClick={handleAuth}
-        >
-          {user ? '로그아웃' : '로그인'}
-        </button>
-      </div>
     </div>
   );
-};
-
-export default UserPage;
+}
