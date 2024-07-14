@@ -1,12 +1,23 @@
+'use client';
+import useShallowSelector from '@/hooks/useShallowSelector';
+import { useAuthStore } from '@/providers/AuthStoreProvider';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const MyPage = () => {
+  const { avatar_url, fullName, email } = useShallowSelector(useAuthStore, ({ user }) => ({
+    avatar_url: user?.user_metadata?.avatar_url || '',
+    fullName: user?.user_metadata?.full_name || '',
+    email: user?.email || ''
+  }));
+
+  if (!email) return null;
+
   return (
     <>
       <div className="flex items-center mt-[30px]">
         <Image
-          src="https://thumbnail.wingeat.com/users/images/ae93af21139a2c7c5c2a57ad5da405ad.jpeg?w=80"
+          src={avatar_url}
           alt="My Page"
           width={50}
           height={50}
@@ -14,8 +25,8 @@ const MyPage = () => {
           unoptimized
         />
         <div className="ml-4">
-          <p className="text-black">예린님 반가워요</p>
-          <p className="text-gray-500 text-sm">lyr@kakao.com</p>
+          <p className="text-black">{fullName}님 반가워요</p>
+          <p className="text-gray-500 text-sm">{email}</p>
         </div>
       </div>
       <ul className="mt-4 space-y-2">

@@ -1,13 +1,14 @@
-'use client';
 import AuthLogin from './_components/AuthLogin';
 import Background from '../../../../../public/images/login/loginBackground.png';
 import LogoIcon from '@/icons/cookcookLogo.svg';
 import Image from 'next/image';
+import CloseButton from './_components/LoginCloseButton';
 
 const SignInPage = () => {
   return (
     <main className="relative w-full h-dvh">
       <div className="absolute top-0 left-0 w-full h-dvh before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.45)]">
+        <CloseButton />
         <Image
           className="w-full h-dvh"
           src={Background}
