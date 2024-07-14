@@ -40,6 +40,8 @@ const MyPage = () => {
     error ? showSwal({ icon: 'error', title: '로그아웃 실패' }) : router.push('/');
   };
 
+  if (!email) return null;
+
   return (
     <>
       <div className="flex items-center mt-[30px]">
