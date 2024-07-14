@@ -1,22 +1,17 @@
 'use client';
 import { CardDescription, CardImage, CardItem, CardList, CardTitle } from '@/components/Card';
 import Typography from '@/components/Typography';
-import axiosInstance from '@/utils/axiosInstance';
-import { useQuery } from '@tanstack/react-query';
+import { usePinnedRecipes } from '@/hooks/queries/useRecipes';
+import type { Recipe } from '@/types/recipe';
 
-const THIRTY_MINUTES_IN_MS = 30 * 60 * 1000;
+type PinnedRecipe = {
+  recipes: Pick<Recipe, 'id' | 'title' | 'subtitle'> & {
+    thumbnail: Exclude<Recipe['thumbnail'], File>;
+  };
+};
 
 const MyPinPage = () => {
-  const getPinnedRecipes = async () => {
-    const { data } = await axiosInstance.get(`/api/mypage/pin`);
-    return data;
-  };
-
-  const { data: pinnedRecipes = [], isPending } = useQuery({
-    queryKey: ['pinnedRecipes'],
-    queryFn: getPinnedRecipes,
-    staleTime: THIRTY_MINUTES_IN_MS
-  });
+  const { data: pinnedRecipes = [], isPending } = usePinnedRecipes();
 
   return (
     <>
@@ -26,9 +21,9 @@ const MyPinPage = () => {
       {!isPending &&
         (pinnedRecipes.length > 0 ? (
           <CardList>
-            {pinnedRecipes.map((recipe) => (
+            {pinnedRecipes.map((recipe: PinnedRecipe) => (
               <CardItem href={`/detail/${recipe.recipes.id}`} key={recipe.recipes.id}>
-                <CardImage src={recipe.recipes.thumbnail} />
+                <CardImage src={recipe.recipes.thumbnail || ''} />
                 <CardTitle>{recipe.recipes.title}</CardTitle>
                 <CardDescription>{recipe.recipes.subtitle}</CardDescription>
               </CardItem>

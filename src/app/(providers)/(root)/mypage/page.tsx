@@ -64,17 +64,17 @@ const MyPage = () => {
             className="text-black text-left flex-grow px-4 py-4 flex justify-between items-center"
           >
             <span> 내가 저장한 레시피</span>
-            <div className="text-gray-200">&gt;</div>
+            <div className="text-gray-300">&gt;</div>
           </Link>
         </li>
         <li className="bg-white rounded-md hover:bg-gray-50 active:bg-gray-100 active:scale-95 transition duration-300">
           <button
             type="button"
             onClick={authLogout}
-            className="text-black text-left flex-grow px-4 py-4 flex justify-between items-center"
+            className="text-black text-left flex-grow px-4 py-4 flex justify-between items-center w-full"
           >
-            <span>로그아웃</span>
-            <div className="text-gray-200">&gt;</div>
+            <span className="flex-grow">로그아웃</span>
+            <div className="text-gray-300">&gt;</div>
           </button>
         </li>
       </ul>

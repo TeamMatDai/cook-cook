@@ -60,7 +60,7 @@ export const getWeeklyRecipePresence = async ({
   return weekPresence;
 };
 
-export const getPinnedRecipes = async ({ userId }: { userId: string }) => {
+export const getPinnedRecipes = async (userId: string) => {
   const supabase = createClient();
 
   const { data, error } = await supabase

@@ -17,3 +17,8 @@ export const fetchWeeklyRecipePresence = async ({ startDate, endDate }: FetchRec
   );
   return data;
 };
+
+export const fetchPinnedRecipes = async () => {
+  const { data } = await axiosInstance.get(`/api/mypage/pin`);
+  return data;
+};
