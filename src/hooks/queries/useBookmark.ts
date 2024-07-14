@@ -18,7 +18,9 @@ const useBookmark = (recipesId: string, userId: string) => {
   const addBookmarkMutation = useMutation({
     mutationFn: () => addBookmark(recipesId, userId),
     onMutate: async () => {
-      await queryClient.cancelQueries(['bookmark', recipesId]);
+      await queryClient.cancelQueries({
+        queryKey: ['bookmark', recipesId]
+      });
 
       const previousBookmark = queryClient.getQueryData<boolean>(['bookmark', recipesId]);
 

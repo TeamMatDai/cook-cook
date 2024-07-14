@@ -5,9 +5,10 @@ import IconBackButton from '@/icons/arrow-left.svg';
 import IconSearch from '@/icons/search-white.svg';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import type { Recipe } from '@/types/recipe';
 
 type RecipeThumbnailProps = {
-  thumbnail: string;
+  thumbnail: Exclude<Recipe['thumbnail'], File>;
   title: string;
 };
 const RecipeThumbnailSection = ({ thumbnail, title }: RecipeThumbnailProps) => {
@@ -25,7 +26,7 @@ const RecipeThumbnailSection = ({ thumbnail, title }: RecipeThumbnailProps) => {
       </header>
       <div className="relative w-full h-full">
         <Image
-          src={thumbnail}
+          src={thumbnail || ''}
           alt={title}
           width={500}
           height={500}

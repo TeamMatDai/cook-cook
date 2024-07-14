@@ -32,9 +32,9 @@ const RecipeSection = ({ recipe }: RecipeSectionProps) => {
       <RecipeInstructionsSection recipe={recipe} />
       <div className="flex flex-row justify-center items-center gap-4 text-gray-400 font-normal text-sm mb-[70px]">
         <ShareButton />
-        <BookmarkButton recipesId={recipe.id} />
+        <BookmarkButton recipesId={recipe.id || ''} />
       </div>
-      <UserInfo recipesId={recipe.id} />
+      <UserInfo recipesId={recipe.id || ''} />
     </div>
   );
 };

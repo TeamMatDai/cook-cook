@@ -4,7 +4,7 @@ import { supabase } from '@/utils/supabase/supabaseClient';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-const UserInfo = ({ recipesId }) => {
+const UserInfo = ({ recipesId }: { recipesId: string }) => {
   const [user, setUser] = useState({ name: '', thumbnail: '' });
 
   useEffect(() => {

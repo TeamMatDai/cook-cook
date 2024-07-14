@@ -14,6 +14,10 @@ type ParamsProps = {
   params: { id: string };
 };
 
+type RecipeResponse = Exclude<Recipe, 'thumbnail'> & {
+  thumbnail: Exclude<Recipe['thumbnail'], File>;
+};
+
 const DetailPage = () => {
   const params = useParams<ParamsProps['params']>();
   const id = params.id;
@@ -22,7 +26,7 @@ const DetailPage = () => {
     data: recipe,
     isPending,
     error
-  }: UseQueryResult<Recipe> = useQuery({
+  }: UseQueryResult<RecipeResponse> = useQuery({
     queryKey: ['recipes', id],
     queryFn: () => getRecipeById(id),
     enabled: !!id

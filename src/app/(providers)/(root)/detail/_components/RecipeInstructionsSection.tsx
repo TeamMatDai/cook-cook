@@ -6,7 +6,7 @@ type RecipeInstructionsSectionProps = {
 };
 
 const RecipeInstructionsSection = ({ recipe }: RecipeInstructionsSectionProps) => {
-  const sanitizedRecipe = DOMPurify.sanitize(recipe.recipe);
+  const sanitizedRecipe = DOMPurify.sanitize(recipe.recipe || '');
   return (
     <article className="pb-6">
       <h1 className="text-2xl mb-4 text-black font-bold">레시피</h1>
