@@ -11,9 +11,7 @@ export async function GET(req: NextRequest) {
   try {
     // TODO: 아이디 바꾸기
     //const user = await getUser(); user.id
-    const data = await getPinnedRecipes({
-      userId: '6619b5b3-4fcc-4b55-a9c9-2bd7688b8614'
-    });
+    const data = await getPinnedRecipes('6619b5b3-4fcc-4b55-a9c9-2bd7688b8614');
     return NextResponse.json(data);
   } catch (error: any) {
     return NextResponse.json(
