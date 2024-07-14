@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import { supabase } from '@/utils/supabase/supabaseClient';
 import type { AuthStoreTypes } from '@/stores/authStore';
 import type { User, UserMetadata } from '@supabase/supabase-js';
+import showSwal from '@/utils/swal';
 
 type UserType = {
   fullName: UserMetadata['full_name'];
@@ -36,10 +37,8 @@ const MyPage = () => {
     logout();
     const { error } = await supabase.auth.signOut();
 
-    error ? alert('로그아웃 실패') : router.push('/');
+    error ? showSwal({ icon: 'error', title: '로그아웃 실패' }) : router.push('/');
   };
-
-  if (!email) return null;
 
   return (
     <>

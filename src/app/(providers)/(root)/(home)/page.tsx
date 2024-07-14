@@ -5,6 +5,8 @@ import { RecipesSwiper } from '@/components/RecipesSwiper';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllRecipes, fetchLatestRecipes } from '@/utils/supabase/fetchRecipes';
 import { CardDescription, CardImage, CardItem, CardTitle } from '@/components/Card';
+import useShallowSelector from '@/hooks/useShallowSelector';
+import { useAuthStore } from '@/providers/AuthStoreProvider';
 import useLoader from '@/hooks/useLoader';
 import Loader from '../detail/_components/Loader';
 
@@ -26,6 +28,10 @@ const Section = ({ title, children }: SectionProps) => (
 );
 
 const Page = () => {
+  const { fullName } = useShallowSelector(useAuthStore, ({ user }) => ({
+    fullName: user?.user_metadata?.full_name || ''
+  }));
+
   const { data: allRecipes = [], isPending } = useQuery<Recipe[]>({
     queryKey: ['allRecipes'],
     queryFn: fetchAllRecipes
@@ -44,7 +50,7 @@ const Page = () => {
 
   return (
     <>
-      <Section title="예린님, 오늘 이 요리 어때요?">
+      <Section title={fullName ? `${fullName}님, 오늘 이 요리 어때요?` : '오늘 이 요리 어때요?'}>
         <RecipesSwiper
           recipes={shuffledRecipes}
           render={(recipe: any) => (

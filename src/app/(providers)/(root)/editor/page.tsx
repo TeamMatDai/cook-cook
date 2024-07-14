@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import QuillEditor from './_components/QuillEditor';
 import FileInput from './_components/FileInput';
 import TimeInput from './_components/TimeInput';
@@ -14,6 +14,8 @@ import Header from './_components/Header';
 import { handleSubmit } from './_utils/handleSubmit';
 import { Recipe } from '@/types/recipe';
 import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/providers/AuthStoreProvider';
+import showSwal from '@/utils/swal';
 
 export const INITIALSTATE: Recipe = {
   title: '',
@@ -31,6 +33,7 @@ const EditPage = () => {
   const [state, setState] = useState<Recipe>(INITIALSTATE);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
+  const user = useAuthStore((state) => state.user);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
@@ -40,6 +43,13 @@ const EditPage = () => {
       fileName: file ? file.name : '썸네일 이미지를 올려주세요'
     }));
   };
+
+  useEffect(() => {
+    if (!user) {
+      showSwal({ icon: 'warning', title: '로그인이 필요한 페이지입니다.' });
+      router.push('/login');
+    }
+  }, []);
 
   const handleChange = <K extends keyof Recipe>(
     key: K,
