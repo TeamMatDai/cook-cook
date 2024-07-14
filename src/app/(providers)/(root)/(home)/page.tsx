@@ -7,6 +7,8 @@ import { fetchAllRecipes, fetchLatestRecipes } from '@/utils/supabase/fetchRecip
 import { CardDescription, CardImage, CardItem, CardTitle } from '@/components/Card';
 import useShallowSelector from '@/hooks/useShallowSelector';
 import { useAuthStore } from '@/providers/AuthStoreProvider';
+import useLoader from '@/hooks/useLoader';
+import Loader from '../detail/_components/Loader';
 
 interface Recipe {
   title: string;
@@ -30,7 +32,7 @@ const Page = () => {
     fullName: user?.user_metadata?.full_name || ''
   }));
 
-  const { data: allRecipes = [] } = useQuery<Recipe[]>({
+  const { data: allRecipes = [], isPending } = useQuery<Recipe[]>({
     queryKey: ['allRecipes'],
     queryFn: fetchAllRecipes
   });
@@ -41,6 +43,10 @@ const Page = () => {
   });
 
   const shuffledRecipes = allRecipes.toSorted(() => 0.5 - Math.random());
+
+  const showLoader = useLoader(isPending);
+
+  if (showLoader) return <Loader />;
 
   return (
     <>
