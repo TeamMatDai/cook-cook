@@ -18,7 +18,7 @@ interface SectionProps {
 
 const Section = ({ title, children }: SectionProps) => (
   <section className="mb-8">
-    <h2 className="text-xl font-bold mb-4 pl-[22px]">{title}</h2>
+    <h2 className="text-xl font-semibold mb-4 pl-[22px]">{title}</h2>
     {children}
   </section>
 );

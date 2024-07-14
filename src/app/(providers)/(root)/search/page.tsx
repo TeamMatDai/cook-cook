@@ -37,7 +37,7 @@ const SearchPage = () => {
         </Typography>
       ) : results.length === 0 ? (
         <Typography className="font-Pretendard mt-[80px] text-[16px] font-medium leading-normal text-center text-[#999]">
-          검색된 레시피가 없어요.
+          검색된 레시피가 없어요
         </Typography>
       ) : (
         <CardList>

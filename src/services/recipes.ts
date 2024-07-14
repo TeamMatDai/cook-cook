@@ -69,8 +69,6 @@ export const getPinnedRecipes = async ({ userId }: { userId: string }) => {
     .eq('userId', userId)
     .order('created_at', { ascending: false });
 
-  console.log(data);
-
   if (error) {
     throw new Error(error.message);
   }

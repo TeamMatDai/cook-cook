@@ -5,8 +5,8 @@ const RecipeList = ({ recipes, isRecipesPending }) =>
   !isRecipesPending &&
   (recipes.length > 0 ? (
     <CardList className="mt-[60px]">
-      {recipes.map((recipe: any, index: number) => (
-        <CardItem href={`/detail/${recipe.id}`} key={index}>
+      {recipes.map((recipe: any) => (
+        <CardItem href={`/detail/${recipe.id}`} key={recipe.id}>
           <CardImage src={recipe.thumbnail} />
           <CardTitle>{recipe.title}</CardTitle>
           <CardDescription>{recipe.subtitle}</CardDescription>
