@@ -59,16 +59,16 @@ const EditPage = () => {
           placeholder="제목을 입력하세요"
           value={state.title}
           setValue={(value) => handleChange('title', value)}
-          className="h-20 px-3 text-[20px] font-semibold border-b border-gray-300"
+          className="h-20 px-3 text-[20px] font-semibold border-b #f0f0f0"
         />
-        <div className="flex flex-col gap-8 my-8">
+        <div className="flex flex-col my-8">
           <div className="flex items-center gap-2">
             <CommentIcon />
             <CommonInput
               placeholder="한 줄 설명을 입력하세요"
               value={state.subtitle}
               setValue={(value) => handleChange('subtitle', value)}
-              className="w-full px-2 py-1"
+              className="h-16 w-full px-2 py-1"
             />
           </div>
           <div className="flex items-center gap-2">
@@ -77,10 +77,10 @@ const EditPage = () => {
               placeholder="내용을 입력하세요"
               value={state.description}
               setValue={(value) => handleChange('description', value)}
-              className="w-full px-2 py-1"
+              className="h-16 w-full px-2 py-1"
             />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 h-16">
             <PhotoIcon />
             <FileInput fileName={state.fileName} onChange={handleFileChange} ref={fileInputRef} />
           </div>

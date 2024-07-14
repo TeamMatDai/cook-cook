@@ -9,23 +9,23 @@ interface LevelSelectorProps {
 
 const LevelSelector = ({ level, setLevel }: LevelSelectorProps) => {
   return (
-    <>
-      <strong className="w-15 h-4 font-semibold mt-7 mb-4">난이도</strong>
+    <div className="pt-4">
+      <p className="w-15 h-4 font-weight:500 mt-7 mb-4">난이도</p>
       <div className="flex flex-row gap-[10px]">
         {LEVELS.map((currentLevel) => (
           <button
             key={currentLevel}
             type="button"
             onClick={() => setLevel(currentLevel)}
-            className={`h-10 font-semibold flex flex-row justify-center items-center gap-[10px] py-[10px] px-[16px] rounded-[30px] ${
-              level === currentLevel ? 'bg-gray-200' : 'bg-[#f5f5f5]'
+            className={`h-[40px] text-[14px] font-semibold flex flex-row justify-center items-center gap-[10px] py-[10px] px-[16px] rounded-[30px] border border-[#F0F0F0] border-solid ${
+              level === currentLevel ? 'bg-[#F5F5F5]' : 'bg-white'
             }`}
           >
             {LEVEL_MAP[currentLevel]}
           </button>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -13,12 +13,14 @@ const Header = ({ onSubmit }: HeaderProps) => {
   };
 
   return (
-    <header className="sticky top-0 z-50 flex justify-between items-center border-b border-[#f1f1f1] px-6 py-4 gap-5 font-semibold mb-3 bg-white">
+    <header className="sticky top-0 z-50 h-[70px] flex justify-between items-center border-b border-[#f0f0f0] px-6 py-4 gap-5 font-semibold mb-3 bg-white">
       <button onClick={handleBack}>
         <BackIcon />
       </button>
-      <strong>글쓰기</strong>
-      <button onClick={onSubmit}>작성</button>
+      <h1>글쓰기</h1>
+      <button className="text-4" onClick={onSubmit}>
+        작성
+      </button>
     </header>
   );
 };
