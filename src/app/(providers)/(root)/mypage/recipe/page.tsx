@@ -13,7 +13,7 @@ import { useAuthStore } from '@/providers/AuthStoreProvider';
 import { useEffect } from 'react';
 import showSwal from '@/utils/swal';
 
-const getWeekDates = (baseDate: Dayjs, offsetWeeks: number = 0) => {
+const getWeekDates = (baseDate: Dayjs, offsetWeeks: number = 0): Dayjs[] => {
   const date = dayjs(baseDate).add(offsetWeeks, 'week');
   const startOfWeek = date.startOf('week');
 

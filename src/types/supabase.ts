@@ -14,19 +14,19 @@ export type Database = {
           created_at: string
           id: number
           recipesId: number
-          userId: string | null
+          userId: string
         }
         Insert: {
           created_at?: string
           id?: number
           recipesId?: number
-          userId?: string | null
+          userId?: string
         }
         Update: {
           created_at?: string
           id?: number
           recipesId?: number
-          userId?: string | null
+          userId?: string
         }
         Relationships: [
           {
@@ -40,7 +40,7 @@ export type Database = {
       }
       recipes: {
         Row: {
-          authorId: string | null
+          authorId: string
           created_at: string
           description: string
           id: number
@@ -53,7 +53,7 @@ export type Database = {
           title: string
         }
         Insert: {
-          authorId?: string | null
+          authorId?: string
           created_at?: string
           description: string
           id?: number
@@ -66,7 +66,7 @@ export type Database = {
           title: string
         }
         Update: {
-          authorId?: string | null
+          authorId?: string
           created_at?: string
           description?: string
           id?: number
@@ -93,21 +93,21 @@ export type Database = {
           created_at: string
           email: string
           id: string
-          name: string | null
+          name: string
           thumbnail: string | null
         }
         Insert: {
           created_at?: string
           email: string
           id: string
-          name?: string | null
+          name: string
           thumbnail?: string | null
         }
         Update: {
           created_at?: string
           email?: string
           id?: string
-          name?: string | null
+          name?: string
           thumbnail?: string | null
         }
         Relationships: [

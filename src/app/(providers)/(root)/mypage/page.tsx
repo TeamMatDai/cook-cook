@@ -7,18 +7,27 @@ import { useRouter } from 'next/navigation';
 import { AuthStoreContext } from '@/providers/AuthStoreProvider';
 import { useContext } from 'react';
 import { supabase } from '@/utils/supabase/supabaseClient';
+import type { AuthStoreTypes } from '@/stores/authStore';
+import type { User, UserMetadata } from '@supabase/supabase-js';
 import showSwal from '@/utils/swal';
+
+type UserType = {
+  fullName: UserMetadata['full_name'];
+  thumbnail: UserMetadata['avatar_url'];
+  email: User['email'];
+  logout: AuthStoreTypes['logout'];
+};
 
 const MyPage = () => {
   const router = useRouter();
   const authStoreContext = useContext(AuthStoreContext);
-  const { avatar_url, fullName, email, logout } = useShallowSelector(
+  const { thumbnail, fullName, email, logout } = useShallowSelector<AuthStoreTypes, UserType>(
     useAuthStore,
     ({ user, logout }) => ({
-      avatar_url: user?.user_metadata?.avatar_url || '',
-      fullName: user?.user_metadata?.full_name || '',
-      email: user?.email || '',
-      logout: logout
+      thumbnail: user?.user_metadata?.avatar_url || null,
+      fullName: user?.user_metadata?.full_name || null,
+      email: user?.email,
+      logout
     })
   );
 
@@ -35,7 +44,7 @@ const MyPage = () => {
     <>
       <div className="flex items-center mt-[30px]">
         <Image
-          src={avatar_url}
+          src={thumbnail}
           alt="My Page"
           width={50}
           height={50}
@@ -48,20 +57,24 @@ const MyPage = () => {
         </div>
       </div>
       <ul className="mt-4 space-y-2">
-        <li className="flex justify-between items-center px-4 py-4 bg-white rounded-md hover:bg-gray-50 active:bg-gray-100 active:scale-95 transition duration-300">
-          <Link href="/mypage/pin" className="text-black">
-            북마크
+        <li className="bg-white rounded-md hover:bg-gray-50 active:bg-gray-100 active:scale-95 transition duration-300">
+          <Link
+            href="/mypage/pin"
+            className="text-black text-left flex-grow px-4 py-4 flex justify-between items-center"
+          >
+            <span> 내가 저장한 레시피</span>
+            <div className="text-gray-300">&gt;</div>
           </Link>
-          <div className="text-gray-200">&gt;</div>
         </li>
-        <li
-          onClick={authLogout}
-          className="flex justify-between items-center px-4 py-4 bg-white rounded-md hover:bg-gray-50 active:bg-gray-100 active:scale-95 transition duration-300"
-        >
-          <Link href="#" className="text-black">
-            로그아웃
-          </Link>
-          <div className="text-gray-200">&gt;</div>
+        <li className="bg-white rounded-md hover:bg-gray-50 active:bg-gray-100 active:scale-95 transition duration-300">
+          <button
+            type="button"
+            onClick={authLogout}
+            className="text-black text-left flex-grow px-4 py-4 flex justify-between items-center w-full"
+          >
+            <span className="flex-grow">로그아웃</span>
+            <div className="text-gray-300">&gt;</div>
+          </button>
         </li>
       </ul>
     </>

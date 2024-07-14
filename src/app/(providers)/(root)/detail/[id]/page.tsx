@@ -1,4 +1,5 @@
 'use client';
+
 import { useParams } from 'next/navigation';
 import { Recipe } from '@/types/recipe';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
@@ -9,12 +10,12 @@ import ErrorPage from '../_components/ErrorPage';
 import RecipeThumbnailSection from '../_components/RecipeThumbnailSection';
 import useLoader from '@/hooks/useLoader';
 
-type ParamsType = {
-  id: string;
+type ParamsProps = {
+  params: { id: string };
 };
 
 const DetailPage = () => {
-  const params = useParams<ParamsType>();
+  const params = useParams<ParamsProps['params']>();
   const id = params.id;
 
   const {

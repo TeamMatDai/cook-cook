@@ -42,16 +42,16 @@ const Header = () => {
         </div>
       </div>
       <nav className="flex justify-around items-center h-[46px]">
-        <Link href="/best" className="text-[15px] font-medium text-[#000]">
+        <Link href="#" className="text-[15px] font-medium text-[#000]">
           베스트
         </Link>
-        <Link href="/new" className="text-[15px] font-medium text-[#000]">
+        <Link href="#" className="text-[15px] font-medium text-[#000]">
           신상품
         </Link>
-        <Link href="/recommend" className="text-[15px] font-medium text-[#000]">
+        <Link href="#" className="text-[15px] font-medium text-[#000]">
           추천
         </Link>
-        <Link href="/event" className="text-[15px] font-medium text-[#000]">
+        <Link href="#" className="text-[15px] font-medium text-[#000]">
           이벤트
         </Link>
       </nav>

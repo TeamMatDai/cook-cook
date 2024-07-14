@@ -9,7 +9,7 @@ import { NAV_ITEMS_LOGIN, NAV_ITEMS_NOT_LOGIN } from './constants';
 
 const BottomNav = () => {
   const currentPath = usePathname();
-  const isLogin = useAuthStore(({ isLogin }) => isLogin);
+  const isLogin = useAuthStore<boolean>(({ isLogin }) => isLogin);
 
   return (
     <nav
