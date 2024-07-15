@@ -6,7 +6,7 @@ import RecipeList from './_components/RecipeList';
 import WeekDays from './_components/WeekDays';
 import WeekDates from './_components/WeekDates';
 import WeekNavigation from './_components/WeekNavigation';
-import { useRecipes, useWeeklyRecipePresence } from '@/hooks/queries/useRecipes';
+import { useMyRecipes, useWeeklyRecipePresence } from '@/hooks/queries/useRecipes';
 import useWeekNavigation from './_hooks/useWeekNavigation';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/providers/AuthStoreProvider';
@@ -40,7 +40,7 @@ const MyRecipePage = () => {
   const createdAt = selectedDate.format('YYYY-MM-DD');
 
   const { data: weeklyRecipePresence = [] } = useWeeklyRecipePresence({ startDate, endDate });
-  const { data: recipes = [], isPending: isRecipesPending } = useRecipes(createdAt);
+  const { data: recipes = [], isPending: isRecipesPending } = useMyRecipes(createdAt);
 
   useEffect(() => {
     if (!user) {

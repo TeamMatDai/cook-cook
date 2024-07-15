@@ -1,9 +1,8 @@
 import { fetchPinnedRecipes, fetchRecipes, fetchWeeklyRecipePresence } from '@/api/recipe';
-import { getPinnedRecipes } from '@/services/recipes';
 import { useQuery } from '@tanstack/react-query';
-import { Dayjs } from 'dayjs';
 
 const THIRTY_MINUTES_IN_MS = 30 * 60 * 1000;
+const THREE_MINUTES_IN_MS = 3 * 60 * 1000;
 
 export const useWeeklyRecipePresence = ({
   startDate,
@@ -19,11 +18,11 @@ export const useWeeklyRecipePresence = ({
   });
 };
 
-export const useRecipes = (createdAt: string) => {
+export const useMyRecipes = (createdAt: string) => {
   return useQuery({
     queryKey: ['recipes', createdAt],
     queryFn: () => fetchRecipes(createdAt),
-    staleTime: THIRTY_MINUTES_IN_MS
+    staleTime: THREE_MINUTES_IN_MS
   });
 };
 
