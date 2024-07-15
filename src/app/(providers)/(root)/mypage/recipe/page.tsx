@@ -12,6 +12,8 @@ import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/providers/AuthStoreProvider';
 import { useEffect } from 'react';
 import showSwal from '@/utils/swal';
+import Loader from '../../detail/_components/Loader';
+import useLoader from '@/hooks/useLoader';
 
 const getWeekDates = (baseDate: Dayjs, offsetWeeks: number = 0): Dayjs[] => {
   const date = dayjs(baseDate).add(offsetWeeks, 'week');
@@ -48,6 +50,10 @@ const MyRecipePage = () => {
       router.push('/login');
     }
   }, [router, user]);
+
+  const showLoader = useLoader(isRecipesPending);
+
+  if (showLoader) return <Loader />;
 
   return (
     <>
