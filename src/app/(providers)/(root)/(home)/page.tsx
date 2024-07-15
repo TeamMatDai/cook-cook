@@ -10,7 +10,6 @@ import useLoader from '@/hooks/useLoader';
 import Loader from '../detail/_components/Loader';
 import { AuthStoreTypes } from '@/stores/authStore';
 import { UserMetadata } from '@supabase/supabase-js';
-import type { Recipe } from '@/types/recipe';
 import { StrictPropsWithChildren } from '@/types/common';
 
 interface SectionProps {

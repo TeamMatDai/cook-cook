@@ -18,8 +18,6 @@ export const handleSubmit = async ({
   fileInputRef,
   router
 }: handleSubmitProps) => {
-  // const router = useRouter();
-
   if (
     state.title.trim() === '' ||
     state.subtitle.trim() === '' ||

@@ -38,6 +38,7 @@ const useBookmark = (recipesId: string, userId: string) => {
       queryClient.invalidateQueries({
         queryKey: ['bookmark', recipesId]
       });
+      queryClient.invalidateQueries({ queryKey: ['pinnedRecipes'] });
     }
   });
 
@@ -51,6 +52,7 @@ const useBookmark = (recipesId: string, userId: string) => {
       const previousBookmark = queryClient.getQueryData<boolean>(['bookmark', recipesId]);
 
       queryClient.setQueryData(['bookmark', recipesId], false);
+      queryClient.invalidateQueries({ queryKey: ['pinnedRecipes'] });
 
       return { previousBookmark };
     },
