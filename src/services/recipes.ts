@@ -7,10 +7,16 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 const RECIPES_CARD_FIELDS = ['title', 'subtitle', 'thumbnail', 'id'];
 
-export const getRecipes = async ({ userId, createdAt }: { userId: string; createdAt: string }) => {
+export const getMyRecipes = async ({
+  userId,
+  createdAt
+}: {
+  userId: string;
+  createdAt: string;
+}) => {
   const supabase = createClient();
-  const createdAtUtc = dayjs.tz(createdAt, 'Asia/Seoul').utc().toISOString();
-  const endDate = dayjs.tz(createdAt, 'Asia/Seoul').add(1, 'day').utc().toISOString();
+  const createdAtUtc = dayjs(createdAt);
+  const endDate = dayjs(createdAt).add(1, 'day');
 
   const { data, error } = await supabase
     .from('recipes')
@@ -36,15 +42,13 @@ export const getWeeklyRecipePresence = async ({
   endDate: string;
 }) => {
   const supabase = createClient();
-  const startDateUtc = dayjs.tz(startDate, 'Asia/Seoul').utc().toISOString();
-  const endDateUtc = dayjs.tz(endDate, 'Asia/Seoul').utc().toISOString();
 
   const { data, error } = await supabase
     .from('recipes')
     .select('created_at')
     .eq('authorId', userId)
-    .gte('created_at', startDateUtc)
-    .lte('created_at', endDateUtc);
+    .gte('created_at', startDate)
+    .lte('created_at', `${endDate}T23:59:59.999999`);
 
   if (error) {
     throw new Error(error.message);

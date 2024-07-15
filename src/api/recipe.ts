@@ -6,7 +6,7 @@ type FetchRecipesParams = {
   endDate: string;
 };
 
-export const fetchRecipes = async (createdAt: string) => {
+export const fetchMyRecipes = async (createdAt: string) => {
   const { data } = await axiosInstance.get(`/api/mypage/recipes?createdAt=${createdAt}`);
   return data;
 };

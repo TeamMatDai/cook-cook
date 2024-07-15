@@ -1,5 +1,5 @@
 import { ERROR_MESSAGES } from '@/constants/errorMessage';
-import { getRecipes } from '@/services/recipes';
+import { getMyRecipes } from '@/services/recipes';
 import { getUser } from '@/services/user';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -17,10 +17,9 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    // TODO: 아이디 바꾸기
-    //const user = await getUser(); user.id
-    const data = await getRecipes({
-      userId: '6619b5b3-4fcc-4b55-a9c9-2bd7688b8614',
+    const user = await getUser();
+    const data = await getMyRecipes({
+      userId: user.id,
       createdAt
     });
     return NextResponse.json(data);
