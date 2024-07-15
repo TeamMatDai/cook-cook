@@ -1,4 +1,3 @@
-// TODO: user정보 받아와서 로직 짜기
 'use client';
 import { supabase } from '@/utils/supabase/supabaseClient';
 import Image from 'next/image';
@@ -24,6 +23,8 @@ const UserInfo = ({ recipesId }: { recipesId: string }) => {
 
     fetchUserData();
   }, [recipesId]);
+
+  if (!user.thumbnail) return null;
 
   return (
     <div className="flex flex-col gap-[18px] justify-center items-center">
