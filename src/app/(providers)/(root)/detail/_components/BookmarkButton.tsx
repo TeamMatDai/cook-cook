@@ -6,13 +6,22 @@ import showSwal from '@/utils/swal';
 import Loader from '../_components/Loader';
 import ErrorPage from '../_components/ErrorPage';
 import useBookmark from '@/hooks/queries/useBookmark';
+import useShallowSelector from '@/hooks/useShallowSelector';
+import { AuthStoreTypes, UserType } from '@/stores/authStore';
+import { useAuthStore } from '@/providers/AuthStoreProvider';
+import type { User } from '@supabase/supabase-js';
 interface BookmarkButtonProps {
   recipesId: string;
 }
 
-// TODO: 북마크기능 로직 리펙토링 필요
+type UserIdType = {
+  userId: User['id'];
+};
 const BookmarkButton = ({ recipesId }: BookmarkButtonProps) => {
-  const userId = '6619b5b3-4fcc-4b55-a9c9-2bd7688b8614'; // 임시 사용자 ID
+  const { userId } = useShallowSelector<AuthStoreTypes, UserIdType>(useAuthStore, ({ user }) => ({
+    userId: user?.id || ''
+  }));
+
   const { isBookmarked, isLoading, error, addBookmark, removeBookmark } = useBookmark(
     recipesId,
     userId

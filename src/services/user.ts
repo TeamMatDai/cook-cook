@@ -8,7 +8,7 @@ export const getUser = async () => {
     data: { user },
     error
   } = await supabase.auth.getUser();
-  if (error || !user) {
+  if (error?.message || !user) {
     throw new Error(ERROR_MESSAGES.INVALID_TOKEN);
   }
   return user;

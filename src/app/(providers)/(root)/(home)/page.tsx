@@ -1,6 +1,5 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
 import { RecipesSwiper } from '@/components/RecipesSwiper';
 import { useQuery } from '@tanstack/react-query';
 import { fetchAllRecipes, fetchLatestRecipes } from '@/utils/supabase/fetchRecipes';
@@ -12,17 +11,17 @@ import Loader from '../detail/_components/Loader';
 import { AuthStoreTypes } from '@/stores/authStore';
 import { UserMetadata } from '@supabase/supabase-js';
 import type { Recipe } from '@/types/recipe';
+import { StrictPropsWithChildren } from '@/types/common';
 
 interface SectionProps {
   title: string;
-  children: React.ReactNode;
 }
 
 type UserType = {
   fullName: UserMetadata['full_name'];
 };
 
-const Section = ({ title, children }: SectionProps) => (
+const Section = ({ title, children }: StrictPropsWithChildren<SectionProps>) => (
   <section className="mb-8">
     <h2 className="text-xl font-semibold mb-4 pl-[22px]">{title}</h2>
     {children}
