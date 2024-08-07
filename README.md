@@ -2,7 +2,7 @@
 
 리액트 심화 팀 프로젝트에서 나만의 음식 레시피를 올리고 공유하는 사이트를 만들었어요<br />
 백엔드는 supabase를 이용했어요<br/><br/>
-🔗 cookcook site : https://cookcook.vercel.app
+🔗 cookcook site : https://cook-cook.vercel.app
 <br/>
 🔗 B-4조 노션 : https://teamsparta.notion.site/B04-ebe05677930041f7b4a9210e926fdbf6
 <br/>
