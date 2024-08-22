@@ -16,7 +16,6 @@
     <td align="center"><b>김소라</b></td>
     <td align="center"><b>한예슬</b></td>
     <td align="center"><b>임다은</b></td>
-    <td align="center"><b>강윤서</b></td>
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/taeyun01"><img src="https://avatars.githubusercontent.com/u/167043856?v=4" width="100px" /></a></td>
@@ -24,7 +23,6 @@
     <td align="center"><a href="https://github.com/Floweringworld"><img src="https://avatars.githubusercontent.com/u/69830157?v=4" width="100px" /></a></td>
     <td align="center"><a href="https://github.com/leesb5510"><img src="https://avatars.githubusercontent.com/u/166012944?v=4" width="100px" /></a></td>
     <td align="center"><a href="https://github.com/jamie240417"><img src="https://avatars.githubusercontent.com/u/167290167?v=4" width="100px" /></a></td>
-    <td align="center"><a href="https://github.com/jamie240417"><img src="https://avatars.githubusercontent.com/u/167046874?v=4" width="100px" /></a></td>
   </tr>
   <tr>
     <td align="center">초기세팅<br/>소셜 로그인 구현<br/> 및 총괄</td>
