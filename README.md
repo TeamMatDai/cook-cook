@@ -30,7 +30,6 @@
     <td align="center">상세페이지 구현</td>
     <td align="center">작성폼 (에디터) 구현</td>
     <td align="center">메인페이지<br/>검색페이지 구현</td>
-    <td align="center">-</td>
   </tr>
 </table>
 
